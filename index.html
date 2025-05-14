@@ -1,77 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>P2P Калькулятор с календарём</title>
-  <script>
-    // При загрузке — применяем сохранённую тему
-    document.addEventListener("DOMContentLoaded", () => {
-      const theme = localStorage.getItem("theme") || "dark";
-      document.body.classList.add(theme);
-    });
-  </script>
   <style>
-     body {
-    font-family: 'Segoe UI', sans-serif;
-    padding: 20px;
-    margin: 0;
-    transition: background-color 0.3s, color 0.3s;
-  }
-
-  /* 🌙 Темная тема */
-  body.dark {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
-
-  body.dark input,
-  body.dark .result,
-  body.dark .calendar,
-  body.dark .circle,
-  body.dark input[type="date"] {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    box-shadow: inset 0 0 5px #2c2c2c;
-  }
-
-  body.dark .circle {
-    background-color: #262626;
-  }
-
-  body.dark .circle:hover {
-    background-color: #333;
-  }
-
-  /* ☀️ Светлая тема */
-  body.light {
-    background-color: #f0f0f0;
-    color: #111111;
-  }
-
-  body.light input,
-  body.light .result,
-  body.light .calendar,
-  body.light .circle,
-  body.light input[type="date"] {
-    background-color: #ffffff;
-    color: #111111;
-    box-shadow: inset 0 0 5px #cccccc;
-  }
-
-  body.light .circle {
-    background-color: #eeeeee;
-  }
-
-  body.light .circle:hover {
-    background-color: #dddddd;
-  }
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
       padding: 20px;
       margin: 0;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    body.light {
+      background-color: #f0f0f0;
+      color: #111111;
     }
 
     .container {
@@ -79,15 +27,10 @@
       margin: 0 auto;
     }
 
-    body.dark h2, body.dark h3, body.dark h4, body.dark label {
-  color: #ffffff;
-  text-align: center;
-}
+    h2, h3, h4, label {
+      text-align: center;
+    }
 
-body.light h2, body.light h3, body.light h4, body.light label {
-  color: #111111;
-  text-align: center;
-}
     .input-group {
       margin-bottom: 15px;
       display: flex;
@@ -98,18 +41,16 @@ body.light h2, body.light h3, body.light h4, body.light label {
     label {
       margin-bottom: 5px;
       font-weight: bold;
-      color: #bfbfbf;
     }
 
-    input {
+    input[type="number"],
+    input[type="date"] {
       width: 80%;
       max-width: 400px;
       padding: 12px;
       font-size: 16px;
       border-radius: 10px;
       border: none;
-      background-color: #1e1e1e;
-      color: #ffffff;
       box-shadow: inset 0 0 5px #2c2c2c;
       box-sizing: border-box;
     }
@@ -148,9 +89,23 @@ body.light h2, body.light h3, body.light h4, body.light label {
       margin-top: 20px;
     }
 
+    .calendar {
+      display: flex;
+      flex-direction: column;
+    }
+
     .calendar-header {
       text-align: center;
       margin-bottom: 10px;
+    }
+
+    .calendar-body {
+      flex: 1;
+    }
+
+    .calendar-footer {
+      margin-top: auto;
+      text-align: center;
     }
 
     .circle {
@@ -163,26 +118,49 @@ body.light h2, body.light h3, body.light h4, body.light label {
       background-color: #333;
     }
 
-    input[type="date"] {
+    /* Theme-specific styles */
+    body.dark input,
+    body.dark .result,
+    body.dark .calendar,
+    body.dark .circle,
+    body.dark input[type="date"] {
       background-color: #1e1e1e;
       color: #ffffff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px;
-      box-shadow: inset 0 0 4px #2c2c2c;
-      text-align: center;
-      appearance: none;
+      box-shadow: inset 0 0 5px #2c2c2c;
+    }
+
+    body.dark .circle {
+      background-color: #262626;
+    }
+
+    body.dark .circle:hover {
+      background-color: #333;
+    }
+
+    body.light input,
+    body.light .result,
+    body.light .calendar,
+    body.light .circle,
+    body.light input[type="date"] {
+      background-color: #ffffff;
+      color: #111111;
+      box-shadow: inset 0 0 5px #cccccc;
+    }
+
+    body.light .circle {
+      background-color: #eeeeee;
+    }
+
+    body.light .circle:hover {
+      background-color: #dddddd;
     }
   </style>
 </head>
-<body>
-
+<body class="dark">
   <div class="container">
     <div id="calculatorScreen">
       <h2>Ивановский P2P</h2>
-      
-<button class="center-button" onclick="toggleTheme()">🌓 Сменить тему</button>
-
+      <button class="center-button" onclick="toggleTheme()">🌓 Сменить тему</button>
 
       <div class="input-group">
         <label for="buyRate">Курс покупки</label>
@@ -214,30 +192,40 @@ body.light h2, body.light h3, body.light h4, body.light label {
     <div class="calendar" id="calendarScreen" style="display: none;">
       <div class="calendar-header">
         <h3>Календарь</h3>
+      </div>
+
+      <div class="calendar-body">
+        <label for="calendarDate" style="text-align: center; display: block; margin-top: 10px;">Выберите дату:</label>
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+          <input type="date" id="calendarDate">
+        </div>
+
+        <button class="center-button" style="font-size: 14px;" onclick="showDayProfit()">Показать прибыль за день</button>
+        <div id="dayProfit" style="margin-top: 15px;"></div>
+
+        <h3 style="text-align:center;">Период</h3>
+        <label for="startDate">Начальная дата:</label>
+        <input type="date" id="startDate">
+
+        <label for="endDate">Конечная дата:</label>
+        <input type="date" id="endDate">
+
+        <button class="center-button" style="font-size: 14px;" onclick="showPeriodProfit()">Показать прибыль за период</button>
+        <div id="periodProfit" style="margin-top: 15px;"></div>
+      </div>
+
+      <div class="calendar-footer">
         <button onclick="goToCalculator()" class="center-button" style="background-color: gray;">Закрыть</button>
       </div>
-
-      <label for="calendarDate" style="text-align: center; display: block; margin-top: 10px;">Выберите дату:</label>
-      <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <input type="date" id="calendarDate">
-      </div>
-
-      <button class="center-button" style="font-size: 14px;" onclick="showDayProfit()">Показать прибыль за день</button>
-      <div id="dayProfit" style="margin-top: 15px;"></div>
-
-      <h3 style="text-align:center;">Период</h3>
-      <label for="startDate">Начальная дата:</label>
-      <input type="date" id="startDate">
-
-      <label for="endDate">Конечная дата:</label>
-      <input type="date" id="endDate">
-
-      <button class="center-button" style="font-size: 14px;" onclick="showPeriodProfit()">Показать прибыль за период</button>
-      <div id="periodProfit" style="margin-top: 15px;"></div>
     </div>
   </div>
 
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const theme = localStorage.getItem("theme") || "dark";
+      document.body.classList.add(theme);
+    });
+
     let currentCircleData = {};
 
     function saveStatistics(date, circleData) {
@@ -248,45 +236,44 @@ body.light h2, body.light h3, body.light h4, body.light label {
     }
 
     function calculate() {
-  const buyRate = parseFloat(document.getElementById('buyRate').value);
-  const sellRate = parseFloat(document.getElementById('sellRate').value);
-  const amount = parseFloat(document.getElementById('amount').value);
-  const feePercent = parseFloat(document.getElementById('fee').value);
+      const buyRate = parseFloat(document.getElementById('buyRate').value);
+      const sellRate = parseFloat(document.getElementById('sellRate').value);
+      const amount = parseFloat(document.getElementById('amount').value);
+      const feePercent = parseFloat(document.getElementById('fee').value);
 
-  if (isNaN(buyRate) || isNaN(sellRate) || isNaN(amount) || isNaN(feePercent)) {
-    alert("Пожалуйста, заполните все поля корректно.");
-    return;
-  }
+      if (isNaN(buyRate) || isNaN(sellRate) || isNaN(amount) || isNaN(feePercent)) {
+        alert("Пожалуйста, заполните все поля корректно.");
+        return;
+      }
 
-  const usdtBought = amount / buyRate;
-  const grossRubles = usdtBought * sellRate;
-  const fee = grossRubles * (feePercent / 100);
-  const netProfit = grossRubles - amount - fee;
+      const usdtBought = amount / buyRate;
+      const grossRubles = usdtBought * sellRate;
+      const fee = grossRubles * (feePercent / 100);
+      const netProfit = grossRubles - amount - fee;
 
-  const realSpread = (netProfit / amount) * 100;
+      const realSpread = (netProfit / amount) * 100;
 
-  const resultDiv = document.getElementById('result');
-  resultDiv.style.display = 'block';
-  resultDiv.innerHTML = `
-    <strong>Вы купили:</strong> ${usdtBought.toFixed(2)} USDT<br>
-    <strong>Продажа даёт:</strong> ${grossRubles.toFixed(2)} ₽<br>
-    <strong>Комиссия:</strong> ${fee.toFixed(2)} ₽<br>
-    <strong>Чистая прибыль:</strong> ${netProfit.toFixed(2)} ₽<br>
-    <strong>Спред:</strong> ${realSpread.toFixed(2)}%
-  `;
+      const resultDiv = document.getElementById('result');
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = `
+        <strong>Вы купили:</strong> ${usdtBought.toFixed(2)} USDT<br>
+        <strong>Продажа даёт:</strong> ${grossRubles.toFixed(2)} ₽<br>
+        <strong>Комиссия:</strong> ${fee.toFixed(2)} ₽<br>
+        <strong>Чистая прибыль:</strong> ${netProfit.toFixed(2)} ₽<br>
+        <strong>Спред:</strong> ${realSpread.toFixed(2)}%
+      `;
 
-  currentCircleData = {
-    buyRate,
-    sellRate,
-    spread: realSpread.toFixed(2),
-    amount,
-    netProfit: netProfit.toFixed(2),
-    fee: fee.toFixed(2)
-  };
+      currentCircleData = {
+        buyRate,
+        sellRate,
+        spread: realSpread.toFixed(2),
+        amount,
+        netProfit: netProfit.toFixed(2),
+        fee: fee.toFixed(2)
+      };
 
-  // <<< ВАЖНО: прокрутка вниз к результату
-  resultDiv.scrollIntoView({ behavior: 'smooth' });
-}
+      resultDiv.scrollIntoView({ behavior: 'smooth' });
+    }
 
     function saveCircle() {
       if (!currentCircleData.buyRate) {
@@ -309,80 +296,77 @@ body.light h2, body.light h3, body.light h4, body.light label {
 
       const stats = JSON.parse(localStorage.getItem('stats')) || {};
       const dayStats = stats[selectedDate] || [];
-      const totalProfit = dayStats.reduce((sum, p) => sum + parseFloat(p.netProfit), 0);
-      const dayProfitDiv = document.getElementById('dayProfit');
-      dayProfitDiv.innerHTML = `<h4>Прибыль за выбранный день: ${totalProfit.toFixed(2)} ₽</h4>`;
+     
 
-      dayStats.forEach((circle, index) => {
-        dayProfitDiv.innerHTML += `
-          <div class="circle">
-            <strong>Круг ${index + 1}</strong><br>
-            Курс покупки: ${circle.buyRate} ₽<br>
-            Курс продажи: ${circle.sellRate} ₽<br>
-            Спред: ${circle.spread}%<br>
-            Сумма сделки: ${circle.amount} ₽<br>
-            Чистая прибыль: ${circle.netProfit} ₽<br>
-            <button onclick="deleteCircle('${selectedDate}', ${index})" style="background-color: red;">Удалить</button>
-          </div>
-        `;
-      });
+const totalProfit = dayStats.reduce((sum, p) => sum + parseFloat(p.netProfit), 0);
+      const totalCircles = dayStats.length;
+
+      const dayProfitDiv = document.getElementById('dayProfit');
+      dayProfitDiv.innerHTML = `
+        <h4>Итоги за ${selectedDate}:</h4>
+        <p>Сделок: ${totalCircles}</p>
+        <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
+      `;
     }
 
     function showPeriodProfit() {
       const startDate = document.getElementById('startDate').value;
       const endDate = document.getElementById('endDate').value;
+
       if (!startDate || !endDate) {
-        alert("Выберите начальную и конечную дату.");
+        alert("Пожалуйста, выберите обе даты.");
         return;
       }
 
       const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      const start = new Date(startDate);
+      const end = new Date(endDate);
       let totalProfit = 0;
+      let totalCircles = 0;
 
       for (let date in stats) {
-        if (date >= startDate && date <= endDate) {
-          const dayStats = stats[date];
-          totalProfit += dayStats.reduce((sum, profit) => sum + parseFloat(profit.netProfit), 0);
+        const current = new Date(date);
+        if (current >= start && current <= end) {
+          stats[date].forEach(c => {
+            totalProfit += parseFloat(c.netProfit);
+            totalCircles++;
+          });
         }
       }
 
       const periodProfitDiv = document.getElementById('periodProfit');
-      periodProfitDiv.innerHTML = `<h4>Прибыль за период с ${startDate} по ${endDate}: ${totalProfit.toFixed(2)} ₽</h4>`;
-    }
-
-    function deleteCircle(date, index) {
-      const stats = JSON.parse(localStorage.getItem('stats')) || {};
-      if (stats[date] && stats[date].length > index) {
-        stats[date].splice(index, 1);
-        localStorage.setItem('stats', JSON.stringify(stats));
-        showDayProfit();
-      } else {
-        alert("Ошибка при удалении круга.");
-      }
+      periodProfitDiv.innerHTML = `
+        <h4>Итоги с ${startDate} по ${endDate}:</h4>
+        <p>Сделок: ${totalCircles}</p>
+        <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
+      `;
     }
 
     function goToCalendar() {
-      document.getElementById('calculatorScreen').style.display = 'none';
-      document.getElementById('calendarScreen').style.display = 'block';
-      document.getElementById('result').style.display = 'none';
-    }
+  document.getElementById('calculatorScreen').style.display = 'none';
+  document.getElementById('calendarScreen').style.display = 'flex';
+  document.getElementById('result').style.display = 'none'; // <--- добавить эту строку
 
-    function goToCalculator() {
-      document.getElementById('calendarScreen').style.display = 'none';
-      document.getElementById('calculatorScreen').style.display = 'block';
-    }
-    function toggleTheme() {
-  const body = document.body;
-  if (body.classList.contains("dark")) {
-    body.classList.remove("dark");
-    body.classList.add("light");
-    localStorage.setItem("theme", "light");
-  } else {
-    body.classList.remove("light");
-    body.classList.add("dark");
-    localStorage.setItem("theme", "dark");
-  }
 }
+function goToCalculator() {
+  document.getElementById('calendarScreen').style.display = 'none';
+  document.getElementById('calculatorScreen').style.display = 'block';
+  document.getElementById('result').style.display = 'none'; // на всякий случай скрываем
+}
+
+    function toggleTheme() {
+      const body = document.body;
+      if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        localStorage.setItem("theme", "light");
+      } else {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        localStorage.setItem("theme", "dark");
+      }
+    }
   </script>
 </body>
 </html>
+
