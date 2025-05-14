@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P2P Калькулятор с календарём</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f8fb;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #000000;
+      font-size: 24px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      width: 80%;
+      max-width: 400px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+      transition: all 0.3s ease-in-out;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+    button, .small-button {
+      padding: 10px 20px;
+      font-size: 14px;
+      line-height: 1.2;
+      border-radius: 6px;
+      border: 1px solid #007bff;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      display: inline-block;
+    }
+
+    button:hover, .small-button:hover {
+      background-color: #0056b3;
+    }
+
+    .result, .calendar, .circle {
+      
+      
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: calc(100% - 20px); /* уменьшили ширину на 20px: по 10px слева и справа */
+  margin-left: 10px; /* сдвигаем вправо на 10px */
+
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .circle {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #e9f7fd;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .circle:hover {
+      background-color: #d0e9f8;
+    }
+
+    .calendar input {
+      margin-bottom: 10px;
+    }
+
+    .calendar button {
+      display: block;
+      width: auto;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    input[type="date"] {
+      width: 130px;
+      padding: 6px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+      appearance: none;
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <div class="container">
+    <div id="calculatorScreen">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" 
+             alt="Календарь" 
+             onclick="goToCalendar()" 
+            
+             style="width: 40px; position: absolute; top: 30px; left: 420px; cursor: pointer;">
+        <h2 style="margin: 0;">
+      </div>
+      
+      <h2>Ивановский P2P</h2>
+
+      <div class="input-group">
+        <label for="buyRate">Курс покупки</label>
+        <input type="number" id="buyRate" placeholder="Например: 90">
+      </div>
+
+      <div class="input-group">
+        <label for="sellRate">Курс продажи</label>
+        <input type="number" id="sellRate" placeholder="Например: 92">
+      </div>
+
+      <div class="input-group">
+        <label for="amount">Сумма сделки (в рублях)</label>
+        <input type="number" id="amount" placeholder="Например: 10000">
+      </div>
+
+      <div class="input-group">
+        <label for="fee">Комиссия (%)</label>
+        <input type="number" id="fee" placeholder="Например: 1">
+      </div>
+
+      <div class="button-group">
+        <button onclick="calculate()" style="width: 150px;">Рассчитать</button>
+        <button onclick="saveCircle()" style="background-color: green; width: 150px;">Сохранить круг</button>
+      </div>
+    </div>
+
+    <div class="result" id="result" style="display:none;"></div>
+
+    <div class="calendar" id="calendarScreen" style="display: none;">
+      <div class="calendar-header">
+        <h3>Календарь</h3>
+        <button onclick="goToCalculator()" style="background-color: gray;">Закрыть</button>
+      </div>
+
+      <label for="calendarDate">Выберите дату:</label>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <label for="calendarDate">Дата:</label>
+        <input type="date" id="calendarDate">
+      </div>
+
+      <button class="small-button" onclick="showDayProfit()">Показать прибыль за день</button>
+      <div id="dayProfit" style="margin-top: 15px;"></div>
+
+      <h3>Период</h3>
+      <label for="startDate">Начальная дата:</label>
+      <input type="date" id="startDate">
+
+      <label for="endDate">Конечная дата:</label>
+      <input type="date" id="endDate">
+
+      <button class="small-button" onclick="showPeriodProfit()">Показать прибыль за период</button>
+      <div id="periodProfit" style="margin-top: 15px;"></div>
+    </div>
+  </div>
+
+  <script>
+    let currentCircleData = {};
+
+    function saveStatistics(date, circleData) {
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      if (!stats[date]) stats[date] = [];
+      stats[date].push(circleData);
+      localStorage.setItem('stats', JSON.stringify(stats));
+    }
+
+    function calculate() {
+      const buyRate = parseFloat(document.getElementById('buyRate').value);
+  const sellRate = parseFloat(document.getElementById('sellRate').value);
+  const amount = parseFloat(document.getElementById('amount').value);
+  const feePercent = parseFloat(document.getElementById('fee').value);
+
+  if (isNaN(buyRate) || isNaN(sellRate) || isNaN(amount) || isNaN(feePercent)) {
+    alert("Пожалуйста, заполните все поля корректно.");
+    return;
+  }
+
+  const usdtBought = amount / buyRate;
+  const grossRubles = usdtBought * sellRate;
+  const fee = grossRubles * (feePercent / 100);
+  const netProfit = grossRubles - amount - fee;
+
+  const realSpread = (netProfit / amount) * 100; // настоящий спред после комиссии
+
+  const resultDiv = document.getElementById('result');
+  resultDiv.style.display = 'block';
+  resultDiv.innerHTML = `
+    <strong>Вы купили:</strong> ${usdtBought.toFixed(2)} USDT<br>
+    <strong>Продажа даёт:</strong> ${grossRubles.toFixed(2)} ₽<br>
+    <strong>Комиссия:</strong> ${fee.toFixed(2)} ₽<br>
+    <strong>Чистая прибыль:</strong> ${netProfit.toFixed(2)} ₽<br>
+    <strong>Спред:</strong> ${realSpread.toFixed(2)}%
+  `;
+
+  currentCircleData = {
+    buyRate,
+    sellRate,
+    spread: realSpread.toFixed(2),
+    amount,
+    netProfit: netProfit.toFixed(2),
+    fee: fee.toFixed(2)
+  };
+
+    }
+
+    function saveCircle() {
+      if (!currentCircleData.buyRate) {
+        alert("Сначала рассчитайте круг.");
+        return;
+      }
+
+      const currentDate = new Date().toISOString().split('T')[0];
+      saveStatistics(currentDate, currentCircleData);
+      alert("Круг сохранён!");
+      currentCircleData = {};
+    }
+
+    function showDayProfit() {
+      const selectedDate = document.getElementById('calendarDate').value;
+      if (!selectedDate) {
+        alert("Пожалуйста, выберите дату.");
+        return;
+      }
+
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      const dayStats = stats[selectedDate] || [];
+      const totalProfit = dayStats.reduce((sum, p) => sum + parseFloat(p.netProfit), 0);
+      const dayProfitDiv = document.getElementById('dayProfit');
+      dayProfitDiv.innerHTML = `<h4>Прибыль за выбранный день: ${totalProfit.toFixed(2)} ₽</h4>`;
+
+      dayStats.forEach((circle, index) => {
+        dayProfitDiv.innerHTML += `
+          <div class="circle">
+            <strong>Круг ${index + 1}</strong><br>
+            Курс покупки: ${circle.buyRate} ₽<br>
+            Курс продажи: ${circle.sellRate} ₽<br>
+            Спред: ${circle.spread}%<br>
+            Сумма сделки: ${circle.amount} ₽<br>
+            Чистая прибыль: ${circle.netProfit} ₽<br>
+            <button onclick="deleteCircle('${selectedDate}', ${index})" style="background-color: red;">Удалить</button>
+          </div>
+        `;
+      });
+    }
+
+    function showPeriodProfit() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      if (!startDate || !endDate) {
+        alert("Выберите начальную и конечную дату.");
+        return;
+      }
+
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      let totalProfit = 0;
+
+      for (let date in stats) {
+        if (date >= startDate && date <= endDate) {
+          const dayStats = stats[date];
+          totalProfit += dayStats.reduce((sum, profit) => sum + parseFloat(profit.netProfit), 0);
+        }
+      }
+
+      const periodProfitDiv = document.getElementById('periodProfit');
+      periodProfitDiv.innerHTML = `<h4>Прибыль за период с ${startDate} по ${endDate}: ${totalProfit.toFixed(2)} ₽</h4>`;
+    }
+
+    function deleteCircle(date, index) {
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      if (stats[date] && stats[date].length > index) {
+        stats[date].splice(index, 1);
+        localStorage.setItem('stats', JSON.stringify(stats));
+        showDayProfit();
+      } else {
+        alert("Ошибка при удалении круга.");
+      }
+    }
+
+    function goToCalendar() {
+      document.getElementById('calculatorScreen').style.display = 'none';
+      document.getElementById('calendarScreen').style.display = 'block';
+      document.getElementById('calculatorScreen').style.display = 'none';
+  document.getElementById('calendarScreen').style.display = 'block';
+  document.getElementById('result').style.display = 'none'; // <<< скрываем результат
+    }
+
+    function goToCalculator() {
+      document.getElementById('calendarScreen').style.display = 'none';
+      document.getElementById('calculatorScreen').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
