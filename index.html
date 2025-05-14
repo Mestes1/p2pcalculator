@@ -182,41 +182,45 @@
     }
 
     function calculate() {
-      const buyRate = parseFloat(document.getElementById('buyRate').value);
-      const sellRate = parseFloat(document.getElementById('sellRate').value);
-      const amount = parseFloat(document.getElementById('amount').value);
-      const feePercent = parseFloat(document.getElementById('fee').value);
+  const buyRate = parseFloat(document.getElementById('buyRate').value);
+  const sellRate = parseFloat(document.getElementById('sellRate').value);
+  const amount = parseFloat(document.getElementById('amount').value);
+  const feePercent = parseFloat(document.getElementById('fee').value);
 
-      if (isNaN(buyRate) || isNaN(sellRate) || isNaN(amount) || isNaN(feePercent)) {
-        alert("Пожалуйста, заполните все поля корректно.");
-        return;
-      }
+  if (isNaN(buyRate) || isNaN(sellRate) || isNaN(amount) || isNaN(feePercent)) {
+    alert("Пожалуйста, заполните все поля корректно.");
+    return;
+  }
 
-      const usdtBought = amount / buyRate;
-      const grossRubles = usdtBought * sellRate;
-      const fee = grossRubles * (feePercent / 100);
-      const netProfit = grossRubles - amount - fee;
-      const realSpread = (netProfit / amount) * 100;
+  const usdtBought = amount / buyRate;
+  const grossRubles = usdtBought * sellRate;
+  const fee = grossRubles * (feePercent / 100);
+  const netProfit = grossRubles - amount - fee;
 
-      const resultDiv = document.getElementById('result');
-      resultDiv.style.display = 'block';
-      resultDiv.innerHTML = `
-        <strong>Вы купили:</strong> ${usdtBought.toFixed(2)} USDT<br>
-        <strong>Продажа даёт:</strong> ${grossRubles.toFixed(2)} ₽<br>
-        <strong>Комиссия:</strong> ${fee.toFixed(2)} ₽<br>
-        <strong>Чистая прибыль:</strong> ${netProfit.toFixed(2)} ₽<br>
-        <strong>Спред:</strong> ${realSpread.toFixed(2)}%
-      `;
+  const realSpread = (netProfit / amount) * 100;
 
-      currentCircleData = {
-        buyRate,
-        sellRate,
-        spread: realSpread.toFixed(2),
-        amount,
-        netProfit: netProfit.toFixed(2),
-        fee: fee.toFixed(2)
-      };
-    }
+  const resultDiv = document.getElementById('result');
+  resultDiv.style.display = 'block';
+  resultDiv.innerHTML = `
+    <strong>Вы купили:</strong> ${usdtBought.toFixed(2)} USDT<br>
+    <strong>Продажа даёт:</strong> ${grossRubles.toFixed(2)} ₽<br>
+    <strong>Комиссия:</strong> ${fee.toFixed(2)} ₽<br>
+    <strong>Чистая прибыль:</strong> ${netProfit.toFixed(2)} ₽<br>
+    <strong>Спред:</strong> ${realSpread.toFixed(2)}%
+  `;
+
+  currentCircleData = {
+    buyRate,
+    sellRate,
+    spread: realSpread.toFixed(2),
+    amount,
+    netProfit: netProfit.toFixed(2),
+    fee: fee.toFixed(2)
+  };
+
+  // <<< ВАЖНО: прокрутка вниз к результату
+  resultDiv.scrollIntoView({ behavior: 'smooth' });
+}
 
     function saveCircle() {
       if (!currentCircleData.buyRate) {
