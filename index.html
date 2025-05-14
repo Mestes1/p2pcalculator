@@ -110,6 +110,22 @@
       text-align: center;
       appearance: none;
     }
+    .delete-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px; /* как у остальных кнопок */
+  border: none;
+  background-color: #dc3545; /* ярко-красный */
+  color: white; /* белый текст */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: inline-block;
+}
+
+.delete-button:hover {
+  background-color: #b02a37; /* тёмно-красный при наведении */
+}
+
   </style>
 </head>
 <body>
@@ -293,6 +309,7 @@
       } else {
         alert("Ошибка при удалении круга.");
       }
+      
     }
 
     function goToCalendar() {
