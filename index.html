@@ -222,9 +222,16 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const theme = localStorage.getItem("theme") || "dark";
-      document.body.classList.add(theme);
-    });
+  const theme = localStorage.getItem("theme") || "dark";
+  document.body.classList.add(theme);
+
+  // Устанавливаем дефолтные даты
+  const defaultDate = "2024-12-06";
+  document.getElementById('calendarDate').value = defaultDate;
+  document.getElementById('startDate').value = defaultDate;
+  document.getElementById('endDate').value = defaultDate;
+});
+
 
     let currentCircleData = {};
 
@@ -343,16 +350,15 @@ const totalProfit = dayStats.reduce((sum, p) => sum + parseFloat(p.netProfit), 0
     }
 
     function goToCalendar() {
-  document.getElementById('calculatorScreen').style.display = 'none';
-  document.getElementById('calendarScreen').style.display = 'flex';
-  document.getElementById('result').style.display = 'none'; // <--- добавить эту строку
-
-}
-function goToCalculator() {
-  document.getElementById('calendarScreen').style.display = 'none';
-  document.getElementById('calculatorScreen').style.display = 'block';
-  document.getElementById('result').style.display = 'none'; // на всякий случай скрываем
-}
+      document.getElementById('calculatorScreen').style.display = 'none';
+      document.getElementById('calendarScreen').style.display = 'flex';
+      document.getElementById('result').style.display = 'none'; // <--- добавить эту строку
+    }
+    function goToCalculator() {
+      document.getElementById('calendarScreen').style.display = 'none';
+      document.getElementById('calculatorScreen').style.display = 'block';
+      document.getElementById('result').style.display = 'none'; // на всякий случай скрываем
+    }
 
     function toggleTheme() {
       const body = document.body;
@@ -369,4 +375,3 @@ function goToCalculator() {
   </script>
 </body>
 </html>
-
