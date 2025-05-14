@@ -4,7 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>P2P Калькулятор с календарём</title>
+  <script>
+    // При загрузке — применяем сохранённую тему
+    document.addEventListener("DOMContentLoaded", () => {
+      const theme = localStorage.getItem("theme") || "dark";
+      document.body.classList.add(theme);
+    });
+  </script>
   <style>
+     body {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  /* 🌙 Темная тема */
+  body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  body.dark input,
+  body.dark .result,
+  body.dark .calendar,
+  body.dark .circle,
+  body.dark input[type="date"] {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    box-shadow: inset 0 0 5px #2c2c2c;
+  }
+
+  body.dark .circle {
+    background-color: #262626;
+  }
+
+  body.dark .circle:hover {
+    background-color: #333;
+  }
+
+  /* ☀️ Светлая тема */
+  body.light {
+    background-color: #f0f0f0;
+    color: #111111;
+  }
+
+  body.light input,
+  body.light .result,
+  body.light .calendar,
+  body.light .circle,
+  body.light input[type="date"] {
+    background-color: #ffffff;
+    color: #111111;
+    box-shadow: inset 0 0 5px #cccccc;
+  }
+
+  body.light .circle {
+    background-color: #eeeeee;
+  }
+
+  body.light .circle:hover {
+    background-color: #dddddd;
+  }
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #121212;
@@ -18,11 +79,15 @@
       margin: 0 auto;
     }
 
-    h2, h3, h4, label {
-      text-align: center;
-      color: #ffffff;
-    }
+    body.dark h2, body.dark h3, body.dark h4, body.dark label {
+  color: #ffffff;
+  text-align: center;
+}
 
+body.light h2, body.light h3, body.light h4, body.light label {
+  color: #111111;
+  text-align: center;
+}
     .input-group {
       margin-bottom: 15px;
       display: flex;
@@ -115,6 +180,9 @@
   <div class="container">
     <div id="calculatorScreen">
       <h2>Ивановский P2P</h2>
+      
+<button class="center-button" onclick="toggleTheme()">🌓 Сменить тему</button>
+
 
       <div class="input-group">
         <label for="buyRate">Курс покупки</label>
@@ -303,6 +371,18 @@
       document.getElementById('calendarScreen').style.display = 'none';
       document.getElementById('calculatorScreen').style.display = 'block';
     }
+    function toggleTheme() {
+  const body = document.body;
+  if (body.classList.contains("dark")) {
+    body.classList.remove("dark");
+    body.classList.add("light");
+    localStorage.setItem("theme", "light");
+  } else {
+    body.classList.remove("light");
+    body.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  }
+}
   </script>
 </body>
 </html>
