@@ -365,22 +365,26 @@ const totalProfit = dayStats.reduce((sum, p) => sum + parseFloat(p.netProfit), 0
     }
 
     function toggleTheme() {
-      const body = document.body;
-      if (body.classList.contains('dark')) {
-        body.classList.remove('dark');
-        body.classList.add('light');
-        localStorage.setItem("theme", "light");
-      } else {
-        body.classList.remove('light');
-        body.classList.add('dark');
-        localStorage.setItem("theme", "dark");
-      }
-      function saveSelectedDate() {
+  const body = document.body;
+  if (body.classList.contains('dark')) {
+    body.classList.remove('dark');
+    body.classList.add('light');
+    localStorage.setItem("theme", "light");
+  } else {
+    body.classList.remove('light');
+    body.classList.add('dark');
+    localStorage.setItem("theme", "dark");
+  }
+}
+
+// перемести эту функцию отдельно, после toggleTheme
+function saveSelectedDate() {
   const selected = document.getElementById('calendarDate').value;
   localStorage.setItem('lastSelectedDate', selected);
 }
 
-    }
+
+    
   </script>
 </body>
 </html>
