@@ -197,7 +197,8 @@
       <div class="calendar-body">
         <label for="calendarDate" style="text-align: center; display: block; margin-top: 10px;">Выберите дату:</label>
         <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-          <input type="date" id="calendarDate">
+          <input type="date" id="calendarDate" onchange="saveSelectedDate()">
+
         </div>
 
         <button class="center-button" style="font-size: 14px;" onclick="showDayProfit()">Показать прибыль за день</button>
@@ -221,16 +222,19 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+ document.addEventListener("DOMContentLoaded", () => {
   const theme = localStorage.getItem("theme") || "dark";
   document.body.classList.add(theme);
 
-  // Устанавливаем дефолтные даты
+  const savedDate = localStorage.getItem("lastSelectedDate");
   const defaultDate = "2024-12-06";
-  document.getElementById('calendarDate').value = defaultDate;
-  document.getElementById('startDate').value = defaultDate;
-  document.getElementById('endDate').value = defaultDate;
+  const dateToSet = savedDate || defaultDate;
+
+  document.getElementById('calendarDate').value = dateToSet;
+  document.getElementById('startDate').value = dateToSet;
+  document.getElementById('endDate').value = dateToSet;
 });
+
 
 
     let currentCircleData = {};
@@ -371,6 +375,11 @@ const totalProfit = dayStats.reduce((sum, p) => sum + parseFloat(p.netProfit), 0
         body.classList.add('dark');
         localStorage.setItem("theme", "dark");
       }
+      function saveSelectedDate() {
+  const selected = document.getElementById('calendarDate').value;
+  localStorage.setItem('lastSelectedDate', selected);
+}
+
     }
   </script>
 </body>
