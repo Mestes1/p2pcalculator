@@ -234,13 +234,55 @@
   </div>
 
   <script>
+    function getTodayDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const day = today.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const theme = localStorage.getItem("theme") || "dark";
+  document.body.classList.add(theme);
+
+  const savedDate = localStorage.getItem("lastSelectedDate");
+  const defaultDate = getTodayDate();
+  const dateToSet = savedDate || defaultDate;
+
+  ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
+    const savedValue = localStorage.getItem(id);
+    if (savedValue !== null) {
+      document.getElementById(id).value = savedValue;
+    }
+  });
+
+  document.getElementById('calendarDate').value = dateToSet;
+  document.getElementById('startDate').value = dateToSet;
+  document.getElementById('endDate').value = dateToSet;
+
+  ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
+    const input = document.getElementById(id);
+    input.addEventListener('input', () => {
+      localStorage.setItem(id, input.value);
+    });
+  });
+});
+
     document.addEventListener("DOMContentLoaded", () => {
       const theme = localStorage.getItem("theme") || "dark";
       document.body.classList.add(theme);
 
       const savedDate = localStorage.getItem("lastSelectedDate");
-      const defaultDate = "2024-12-06";
-      const dateToSet = savedDate || defaultDate;
+const defaultDate = getTodayDate();
+const dateToSet = savedDate || defaultDate;
+
+document.getElementById('calendarDate').value = dateToSet;
+document.getElementById('startDate').value = dateToSet;
+document.getElementById('endDate').value = dateToSet;
+
+      
+      
       ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
         const savedValue = localStorage.getItem(id);
         if (savedValue !== null) {
@@ -332,6 +374,13 @@ function showDayProfit() {
     <p>Сделок: ${totalCircles}</p>
     <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
   `;
+}
+function getTodayDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const day = today.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 function showPeriodProfit() {
