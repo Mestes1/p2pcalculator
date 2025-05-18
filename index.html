@@ -429,7 +429,8 @@ function goToCalculator() {
 
     // Новая функция для открытия окна со списком кругов за выбранный день
     // Функция открытия экрана с кругами за день, вместо открытия нового окна
-    function openCirclesWindow() {
+   // Функция открытия экрана с кругами за выбранный день
+function openCirclesWindow() {
   const selectedDate = document.getElementById('calendarDate').value;
   if (!selectedDate) {
     alert("Пожалуйста, выберите дату.");
@@ -459,7 +460,17 @@ function goToCalculator() {
         Сумма сделки: ${circle.amount} ₽<br>
         Чистая прибыль: ${circle.netProfit} ₽<br>
         Комиссия: ${circle.fee} ₽
-        <button style="position:absolute; top:10px; right:10px; background:#e74c3c; color:#fff; border:none; border-radius:5px; cursor:pointer;" onclick="deleteCircle('${selectedDate}', ${index})">Удалить</button>
+        <button style="
+          position:absolute; 
+          top:10px; 
+          right:10px; 
+          background:#e74c3c; 
+          color:#fff; 
+          border:none; 
+          border-radius:5px; 
+          cursor:pointer;
+          padding: 5px 10px;
+        " onclick="deleteCircle('${selectedDate}', ${index})">Удалить</button>
       `;
 
       container.appendChild(div);
@@ -471,27 +482,36 @@ function goToCalculator() {
   document.getElementById('circlesScreen').style.display = 'flex';
 }
 
+// Функция закрытия экрана с кругами
 function closeCirclesScreen() {
   document.getElementById('circlesScreen').style.display = 'none';
   document.getElementById('calendarScreen').style.display = 'flex';
 }
 
-// Удаление круга по индексу и обновление localStorage
+// Функция удаления круга по индексу
 function deleteCircle(date, index) {
-  if (!confirm(`Удалить круг №${index + 1} за дату ${date}?`)) return;
+  if (!confirm('Вы уверены, что хотите удалить этот круг?')) return;
 
   const stats = JSON.parse(localStorage.getItem('stats')) || {};
   if (!stats[date]) return;
 
-  stats[date].splice(index, 1); // удалить круг по индексу
+  // Удаляем элемент из массива
+  stats[date].splice(index, 1);
 
+  // Если после удаления массив пуст, удаляем ключ с датой
   if (stats[date].length === 0) {
-    delete stats[date]; // удалить дату если пусто
+    delete stats[date];
   }
 
   localStorage.setItem('stats', JSON.stringify(stats));
-  openCirclesWindow(); // обновить список
+
+  // Обновляем список кругов
+  openCirclesWindow();
+
+  // Можно обновить статистику за день, если она показана
+  showDayProfit();
 }
+
 
 
 
