@@ -198,10 +198,10 @@
         <label for="calendarDate" style="text-align: center; display: block; margin-top: 10px;">Выберите дату:</label>
         <div style="display: flex; justify-content: center; margin-bottom: 20px;">
           <input type="date" id="calendarDate" onchange="saveSelectedDate()">
-
         </div>
 
         <button class="center-button" style="font-size: 14px;" onclick="showDayProfit()">Показать прибыль за день</button>
+        <button class="center-button" style="font-size: 14px; background-color: #4caf50;" onclick="openCirclesWindow()">Круги за день</button>
         <div id="dayProfit" style="margin-top: 15px;"></div>
 
         <h3 style="text-align:center;">Период</h3>
@@ -222,35 +222,32 @@
   </div>
 
   <script>
- document.addEventListener("DOMContentLoaded", () => {
-  const theme = localStorage.getItem("theme") || "dark";
-  document.body.classList.add(theme);
+    document.addEventListener("DOMContentLoaded", () => {
+      const theme = localStorage.getItem("theme") || "dark";
+      document.body.classList.add(theme);
 
-  const savedDate = localStorage.getItem("lastSelectedDate");
-  const defaultDate = "2024-12-06";
-  const dateToSet = savedDate || defaultDate;
-  ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
-  const savedValue = localStorage.getItem(id);
-  if (savedValue !== null) {
-    document.getElementById(id).value = savedValue;
-  }
-});
+      const savedDate = localStorage.getItem("lastSelectedDate");
+      const defaultDate = "2024-12-06";
+      const dateToSet = savedDate || defaultDate;
+      ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
+        const savedValue = localStorage.getItem(id);
+        if (savedValue !== null) {
+          document.getElementById(id).value = savedValue;
+        }
+      });
 
+      document.getElementById('calendarDate').value = dateToSet;
+      document.getElementById('startDate').value = dateToSet;
+      document.getElementById('endDate').value = dateToSet;
 
-  document.getElementById('calendarDate').value = dateToSet;
-  document.getElementById('startDate').value = dateToSet;
-  document.getElementById('endDate').value = dateToSet;
-  // Автоматическое сохранение введённых данных
-['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
-  const input = document.getElementById(id);
-  input.addEventListener('input', () => {
-    localStorage.setItem(id, input.value);
-  });
-});
-
-});
-
-
+      // Автоматическое сохранение введённых данных
+      ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
+        const input = document.getElementById(id);
+        input.addEventListener('input', () => {
+          localStorage.setItem(id, input.value);
+        });
+      });
+    });
 
     let currentCircleData = {};
 
@@ -262,144 +259,345 @@
     }
 
     function calculate() {
-      const buyRate = parseFloat(document.getElementById('buyRate').value);
-      const sellRate = parseFloat(document.getElementById('sellRate').value);
-      const amount = parseFloat(document.getElementById('amount').value);
-      const feePercent = parseFloat(document.getElementById('fee').value);
+  const buyRate = parseFloat(document.getElementById('buyRate').value);
+  const sellRate = parseFloat(document.getElementById('sellRate').value);
+  const amount = parseFloat(document.getElementById('amount').value);
+  const feePercent = parseFloat(document.getElementById('fee').value);
 
-      if (isNaN(buyRate) || isNaN(sellRate) || isNaN(amount) || isNaN(feePercent)) {
-        alert("Пожалуйста, заполните все поля корректно.");
-        return;
-      }
+  if (isNaN(buyRate) || isNaN(sellRate) || isNaN(amount) || isNaN(feePercent)) {
+    alert("Пожалуйста, заполните все поля корректно.");
+    return;
+  }
 
-      const usdtBought = amount / buyRate;
-      const grossRubles = usdtBought * sellRate;
-      const fee = grossRubles * (feePercent / 100);
-      const netProfit = grossRubles - amount - fee;
+  const usdtBought = amount / buyRate;
+  const grossRubles = usdtBought * sellRate;
+  const fee = grossRubles * (feePercent / 100);
+  const netProfit = grossRubles - amount - fee;
 
-      const realSpread = (netProfit / amount) * 100;
+  const realSpread = (netProfit / amount) * 100;
 
-      const resultDiv = document.getElementById('result');
-      resultDiv.style.display = 'block';
-      resultDiv.innerHTML = `
-        <strong>Вы купили:</strong> ${usdtBought.toFixed(2)} USDT<br>
-        <strong>Продажа даёт:</strong> ${grossRubles.toFixed(2)} ₽<br>
-        <strong>Комиссия:</strong> ${fee.toFixed(2)} ₽<br>
-        <strong>Чистая прибыль:</strong> ${netProfit.toFixed(2)} ₽<br>
-        <strong>Спред:</strong> ${realSpread.toFixed(2)}%
-      `;
+  const resultDiv = document.getElementById('result');
+  resultDiv.style.display = 'block';
+  resultDiv.innerHTML = `
+    <strong>Вы купили:</strong> ${usdtBought.toFixed(2)} USDT<br>
+    <strong>Продажа даёт:</strong> ${grossRubles.toFixed(2)} ₽<br>
+    <strong>Комиссия:</strong> ${fee.toFixed(2)} ₽<br>
+    <strong>Чистая прибыль:</strong> ${netProfit.toFixed(2)} ₽<br>
+    <strong>Спред:</strong> ${realSpread.toFixed(2)}%
+  `;
 
-      currentCircleData = {
-        buyRate,
-        sellRate,
-        spread: realSpread.toFixed(2),
-        amount,
-        netProfit: netProfit.toFixed(2),
-        fee: fee.toFixed(2)
-      };
+  currentCircleData = {
+    buyRate: buyRate,
+    sellRate: sellRate,
+    spread: parseFloat(realSpread.toFixed(2)),
+    amount: amount,
+    netProfit: parseFloat(netProfit.toFixed(2)),
+    fee: parseFloat(fee.toFixed(2))
+  };
 
-      resultDiv.scrollIntoView({ behavior: 'smooth' });
-    }
+  resultDiv.scrollIntoView({ behavior: 'smooth' });
+}
 
-    function saveCircle() {
-      if (!currentCircleData.buyRate) {
-        alert("Сначала рассчитайте круг.");
-        return;
-      }
+function showDayProfit() {
+  const selectedDate = document.getElementById('calendarDate').value;
+  if (!selectedDate) {
+    alert("Пожалуйста, выберите дату.");
+    return;
+  }
 
-      const currentDate = new Date().toISOString().split('T')[0];
-      saveStatistics(currentDate, currentCircleData);
-      alert("Круг сохранён!");
-      currentCircleData = {};
-    }
+  const stats = JSON.parse(localStorage.getItem('stats')) || {};
+  const dayStats = stats[selectedDate] || [];
 
-    function showDayProfit() {
-      const selectedDate = document.getElementById('calendarDate').value;
-      if (!selectedDate) {
-        alert("Пожалуйста, выберите дату.");
-        return;
-      }
+  const totalProfit = dayStats.reduce((sum, p) => {
+    const val = parseFloat(p.netProfit);
+    return sum + (isNaN(val) ? 0 : val);
+  }, 0);
+  const totalCircles = dayStats.length;
 
-      const stats = JSON.parse(localStorage.getItem('stats')) || {};
-      const dayStats = stats[selectedDate] || [];
-     
+  const dayProfitDiv = document.getElementById('dayProfit');
+  dayProfitDiv.innerHTML = `
+    <h4>Итоги за ${selectedDate}:</h4>
+    <p>Сделок: ${totalCircles}</p>
+    <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
+  `;
+}
 
-const totalProfit = dayStats.reduce((sum, p) => sum + parseFloat(p.netProfit), 0);
-      const totalCircles = dayStats.length;
+function showPeriodProfit() {
+  const startDate = document.getElementById('startDate').value;
+  const endDate = document.getElementById('endDate').value;
 
-      const dayProfitDiv = document.getElementById('dayProfit');
-      dayProfitDiv.innerHTML = `
-        <h4>Итоги за ${selectedDate}:</h4>
-        <p>Сделок: ${totalCircles}</p>
-        <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
-      `;
-    }
+  if (!startDate || !endDate) {
+    alert("Пожалуйста, выберите обе даты.");
+    return;
+  }
 
-    function showPeriodProfit() {
-      const startDate = document.getElementById('startDate').value;
-      const endDate = document.getElementById('endDate').value;
+  const stats = JSON.parse(localStorage.getItem('stats')) || {};
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  let totalProfit = 0;
+  let totalCircles = 0;
 
-      if (!startDate || !endDate) {
-        alert("Пожалуйста, выберите обе даты.");
-        return;
-      }
-
-      const stats = JSON.parse(localStorage.getItem('stats')) || {};
-      const start = new Date(startDate);
-      const end = new Date(endDate);
-      let totalProfit = 0;
-      let totalCircles = 0;
-
-      for (let date in stats) {
-        const current = new Date(date);
-        if (current >= start && current <= end) {
-          stats[date].forEach(c => {
-            totalProfit += parseFloat(c.netProfit);
-            totalCircles++;
-          });
+  for (const dateStr in stats) {
+    const d = new Date(dateStr);
+    if (d >= start && d <= end) {
+      stats[dateStr].forEach(c => {
+        const val = parseFloat(c.netProfit);
+        if (!isNaN(val)) {
+          totalProfit += val;
+          totalCircles++;
         }
-      }
-
-      const periodProfitDiv = document.getElementById('periodProfit');
-      periodProfitDiv.innerHTML = `
-        <h4>Итоги с ${startDate} по ${endDate}:</h4>
-        <p>Сделок: ${totalCircles}</p>
-        <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
-      `;
+      });
     }
+  }
+
+  const periodProfitDiv = document.getElementById('periodProfit');
+  periodProfitDiv.innerHTML = `
+    <h4>Итоги за период ${startDate} - ${endDate}:</h4>
+    <p>Сделок: ${totalCircles}</p>
+    <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
+  `;
+}
+
+        
+    
 
     function goToCalendar() {
-      document.getElementById('calculatorScreen').style.display = 'none';
-      document.getElementById('calendarScreen').style.display = 'flex';
-      document.getElementById('result').style.display = 'none'; // <--- добавить эту строку
-    }
-    function goToCalculator() {
-      document.getElementById('calendarScreen').style.display = 'none';
-      document.getElementById('calculatorScreen').style.display = 'block';
-      document.getElementById('result').style.display = 'none'; // на всякий случай скрываем
-    }
+  document.getElementById('calculatorScreen').style.display = 'none';
+  document.getElementById('calendarScreen').style.display = 'flex';
+  document.getElementById('result').style.display = 'none';
+}
+
+function goToCalculator() {
+  document.getElementById('calendarScreen').style.display = 'none';
+  document.getElementById('calculatorScreen').style.display = 'block';
+  document.getElementById('result').style.display = 'none';
+}
+
 
     function toggleTheme() {
-  const body = document.body;
-  if (body.classList.contains('dark')) {
-    body.classList.remove('dark');
-    body.classList.add('light');
-    localStorage.setItem("theme", "light");
-  } else {
-    body.classList.remove('light');
-    body.classList.add('dark');
-    localStorage.setItem("theme", "dark");
+      const body = document.body;
+      if (body.classList.contains('dark')) {
+        body.classList.replace('dark', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.classList.replace('light', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    function saveCircle() {
+  if (!currentCircleData || Object.keys(currentCircleData).length === 0) {
+    alert("Сначала сделайте расчёт круга (нажмите 'Рассчитать').");
+    return;
   }
+
+  // Получаем текущую дату в формате YYYY-MM-DD
+  const today = new Date().toISOString().slice(0, 10);
+
+  // Загружаем уже сохранённые круги из localStorage
+  const stats = JSON.parse(localStorage.getItem('stats')) || {};
+
+  // Если для текущей даты ещё нет массива — создаём его
+  if (!stats[today]) {
+    stats[today] = [];
+  }
+
+  // Добавляем текущий круг
+  stats[today].push(currentCircleData);
+
+  // Сохраняем обратно в localStorage
+  localStorage.setItem('stats', JSON.stringify(stats));
+
+  alert("Круг успешно сохранён!");
 }
 
-// перемести эту функцию отдельно, после toggleTheme
-function saveSelectedDate() {
-  const selected = document.getElementById('calendarDate').value;
-  localStorage.setItem('lastSelectedDate', selected);
+    function saveSelectedDate() {
+      const selectedDate = document.getElementById('calendarDate').value;
+      localStorage.setItem('lastSelectedDate', selectedDate);
+    }
+
+    // Новая функция для открытия окна со списком кругов за выбранный день
+    function openCirclesWindow() {
+  const selectedDate = document.getElementById('calendarDate').value;
+  if (!selectedDate) {
+    alert("Пожалуйста, выберите дату.");
+    return;
+  }
+
+  let stats = JSON.parse(localStorage.getItem('stats')) || {};
+  let dayStats = stats[selectedDate] || [];
+
+  const newWindow = window.open('', '_blank', 'width=500,height=600');
+  if (!newWindow) {
+    alert('Блокировщик окон мешает открыть новое окно. Разрешите всплывающие окна.');
+    return;
+  }
+
+  const doc = newWindow.document;
+  doc.title = `Круги за ${selectedDate}`;
+  doc.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+  doc.body.style.margin = '20px';
+  doc.body.style.backgroundColor = '#f8f9fa';
+  doc.body.style.color = '#212529';
+
+  const h2 = doc.createElement('h2');
+  h2.textContent = `Круги за ${selectedDate}`;
+  h2.style.textAlign = 'center';
+  h2.style.marginBottom = '20px';
+  doc.body.appendChild(h2);
+
+  const container = doc.createElement('div');
+  doc.body.appendChild(container);
+
+  // Словарь русских названий для ключей
+  const fieldNames = {
+  buyRate: 'Курс покупки',
+  sellRate: 'Курс продажи',
+  spread: 'Спред',
+  amount: 'Сумма сделки',
+  netProfit: 'Чистая прибыль',
+  fee: 'Комиссия (%)',
+  // добавь остальные ключи
+};
+
+
+  function renderCircles() {
+    container.innerHTML = ''; // очистить список перед перерисовкой
+
+    if (dayStats.length === 0) {
+      const p = doc.createElement('p');
+      p.textContent = 'За этот день нет сохранённых кругов.';
+      p.style.fontStyle = 'italic';
+      p.style.textAlign = 'center';
+      p.style.marginTop = '30px';
+      container.appendChild(p);
+      return;
+    }
+
+    dayStats.forEach((circle, idx) => {
+      const div = doc.createElement('div');
+      div.style.border = '1px solid #ddd';
+      div.style.padding = '12px';
+      div.style.borderRadius = '10px';
+      div.style.marginBottom = '10px';
+      div.style.backgroundColor = '#ffffff';
+      div.style.boxShadow = '2px 2px 8px rgba(0,0,0,0.05)';
+      div.style.position = 'relative';
+
+      const h3 = doc.createElement('h3');
+      h3.textContent = `Сделка №${idx + 1}`;
+      h3.style.marginTop = '0';
+      h3.style.marginBottom = '6px';
+      div.appendChild(h3);
+
+      // Вывод полей круга с русскими заголовками
+      for (const key in circle) {
+  const p = doc.createElement('p');
+  const label = fieldNames[key] || key; // точное совпадение по ключу
+  p.textContent = `${label}: ${circle[key]}`;
+  div.appendChild(p);
 }
 
 
-    
+      // Кнопка удаления
+      const deleteBtn = doc.createElement('button');
+      deleteBtn.textContent = 'Удалить';
+      deleteBtn.style.position = 'absolute';
+      deleteBtn.style.top = '12px';
+      deleteBtn.style.right = '12px';
+      deleteBtn.style.backgroundColor = '#e74c3c';
+      deleteBtn.style.color = 'white';
+      deleteBtn.style.border = 'none';
+      deleteBtn.style.borderRadius = '6px';
+      deleteBtn.style.padding = '5px 10px';
+      deleteBtn.style.cursor = 'pointer';
+      deleteBtn.addEventListener('click', () => {
+        if (confirm(`Удалить сделку №${idx + 1}?`)) {
+          dayStats.splice(idx, 1); // удалить круг из массива
+          stats[selectedDate] = dayStats; // обновить данные
+          localStorage.setItem('stats', JSON.stringify(stats));
+          renderCircles(); // обновить список в окне
+        }
+      });
+
+      div.appendChild(deleteBtn);
+      container.appendChild(div);
+    });
+  }
+
+  renderCircles();
+}
+
+
+  if (dayStats.length === 0) {
+    const p = doc.createElement('p');
+    p.textContent = 'За этот день нет сохранённых кругов.';
+    p.style.fontStyle = 'italic';
+    p.style.textAlign = 'center';
+    p.style.marginTop = '30px';
+    doc.body.appendChild(p);
+  } else {
+    dayStats.forEach((circle, idx) => {
+      const div = doc.createElement('div');
+      div.style.border = '1px solid #ddd';
+      div.style.padding = '12px';
+      div.style.borderRadius = '10px';
+      div.style.marginBottom = '10px';
+      div.style.backgroundColor = '#ffffff';
+      div.style.boxShadow = '2px 2px 8px rgba(0,0,0,0.05)';
+
+      const h3 = doc.createElement('h3');
+      h3.textContent = `Сделка №${idx + 1}`;
+      h3.style.marginTop = '0';
+      h3.style.marginBottom = '6px';
+      div.appendChild(h3);
+
+      const fields = [
+        ['Курс покупки', circle.buyRate],
+        ['Курс продажи', circle.sellRate],
+        ['Спред (%)', circle.spread],
+        ['Сумма сделки (₽)', circle.amount],
+        ['Чистая прибыль (₽)', circle.netProfit],
+        ['Комиссия (₽)', circle.fee]
+      ];
+
+      fields.forEach(([label, value]) => {
+        const p = doc.createElement('p');
+        p.innerHTML = `<strong>${label}:</strong> ${value}`;
+        p.style.margin = '2px 0';
+        div.appendChild(p);
+      });
+
+      doc.body.appendChild(div);
+    });
+  }
+
+  const btn = doc.createElement('button');
+  btn.textContent = 'Закрыть окно';
+  btn.style.marginTop = '20px';
+  btn.style.padding = '10px 20px';
+  btn.style.fontSize = '16px';
+  btn.style.border = 'none';
+  btn.style.borderRadius = '8px';
+  btn.style.backgroundColor = '#5f27cd';
+  btn.style.color = 'white';
+  btn.style.cursor = 'pointer';
+  btn.style.display = 'block';
+  btn.style.marginLeft = 'auto';
+  btn.style.marginRight = 'auto';
+
+  btn.onmouseover = () => btn.style.backgroundColor = '#4b1ea0';
+  btn.onmouseout = () => btn.style.backgroundColor = '#5f27cd';
+
+  btn.onclick = () => newWindow.close();
+
+  doc.body.appendChild(btn);
+
+{
+
+      const newWindow = window.open('', '_blank', 'width=500,height=600');
+      newWindow.document.write(html);
+      newWindow.document.close();
+    }
   </script>
 </body>
 </html>
