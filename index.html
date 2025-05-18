@@ -229,10 +229,25 @@
   const savedDate = localStorage.getItem("lastSelectedDate");
   const defaultDate = "2024-12-06";
   const dateToSet = savedDate || defaultDate;
+  ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
+  const savedValue = localStorage.getItem(id);
+  if (savedValue !== null) {
+    document.getElementById(id).value = savedValue;
+  }
+});
+
 
   document.getElementById('calendarDate').value = dateToSet;
   document.getElementById('startDate').value = dateToSet;
   document.getElementById('endDate').value = dateToSet;
+  // Автоматическое сохранение введённых данных
+['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
+  const input = document.getElementById(id);
+  input.addEventListener('input', () => {
+    localStorage.setItem(id, input.value);
+  });
+});
+
 });
 
 
