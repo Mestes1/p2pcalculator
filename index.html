@@ -218,7 +218,19 @@
       <div class="calendar-footer">
         <button onclick="goToCalculator()" class="center-button" style="background-color: gray;">Закрыть</button>
       </div>
+
     </div>
+    <!-- Добавляем новый экран кругов -->
+<div class="calendar" id="circlesScreen" style="display: none; flex-direction: column;">
+  <div class="calendar-header">
+    <h3>Круги за выбранный день</h3>
+  </div>
+  <div id="circlesContainer" style="overflow-y: auto; max-height: 400px; padding: 10px;"></div>
+  <div class="calendar-footer">
+    <button onclick="closeCirclesScreen()" class="center-button" style="background-color: gray;">Закрыть</button>
+  </div>
+</div>
+
   </div>
 
   <script>
@@ -416,6 +428,7 @@ function goToCalculator() {
     }
 
     // Новая функция для открытия окна со списком кругов за выбранный день
+    // Функция открытия экрана с кругами за день, вместо открытия нового окна
     function openCirclesWindow() {
   const selectedDate = document.getElementById('calendarDate').value;
   if (!selectedDate) {
@@ -423,109 +436,65 @@ function goToCalculator() {
     return;
   }
 
-  let stats = JSON.parse(localStorage.getItem('stats')) || {};
-  let dayStats = stats[selectedDate] || [];
+  const stats = JSON.parse(localStorage.getItem('stats')) || {};
+  const dayStats = stats[selectedDate] || [];
 
-  const newWindow = window.open('', '_blank', 'width=500,height=600');
-  if (!newWindow) {
-    alert('Блокировщик окон мешает открыть новое окно. Разрешите всплывающие окна.');
-    return;
-  }
+  const container = document.getElementById('circlesContainer');
+  container.innerHTML = ''; // очистить перед заполнением
 
-  const doc = newWindow.document;
-  doc.title = `Круги за ${selectedDate}`;
-  doc.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-  doc.body.style.margin = '20px';
-  doc.body.style.backgroundColor = '#f8f9fa';
-  doc.body.style.color = '#212529';
-
-  const h2 = doc.createElement('h2');
-  h2.textContent = `Круги за ${selectedDate}`;
-  h2.style.textAlign = 'center';
-  h2.style.marginBottom = '20px';
-  doc.body.appendChild(h2);
-
-  const container = doc.createElement('div');
-  doc.body.appendChild(container);
-
-  // Словарь русских названий для ключей
-  const fieldNames = {
-  buyRate: 'Курс покупки',
-  sellRate: 'Курс продажи',
-  spread: 'Спред',
-  amount: 'Сумма сделки',
-  netProfit: 'Чистая прибыль',
-  fee: 'Комиссия (%)',
-  // добавь остальные ключи
-};
-
-
-  function renderCircles() {
-    container.innerHTML = ''; // очистить список перед перерисовкой
-
-    if (dayStats.length === 0) {
-      const p = doc.createElement('p');
-      p.textContent = 'За этот день нет сохранённых кругов.';
-      p.style.fontStyle = 'italic';
-      p.style.textAlign = 'center';
-      p.style.marginTop = '30px';
-      container.appendChild(p);
-      return;
-    }
-
-    dayStats.forEach((circle, idx) => {
-      const div = doc.createElement('div');
-      div.style.border = '1px solid #ddd';
-      div.style.padding = '12px';
-      div.style.borderRadius = '10px';
-      div.style.marginBottom = '10px';
-      div.style.backgroundColor = '#ffffff';
-      div.style.boxShadow = '2px 2px 8px rgba(0,0,0,0.05)';
+  if (dayStats.length === 0) {
+    container.innerHTML = '<p style="text-align:center;">Круги за этот день не найдены.</p>';
+  } else {
+    dayStats.forEach((circle, index) => {
+      const div = document.createElement('div');
+      div.className = 'circle';
       div.style.position = 'relative';
+      div.style.paddingRight = '40px';
 
-      const h3 = doc.createElement('h3');
-      h3.textContent = `Сделка №${idx + 1}`;
-      h3.style.marginTop = '0';
-      h3.style.marginBottom = '6px';
-      div.appendChild(h3);
+      div.innerHTML = `
+        <strong>Круг #${index + 1}</strong><br>
+        Курс покупки: ${circle.buyRate}<br>
+        Курс продажи: ${circle.sellRate}<br>
+        Спред: ${circle.spread}%<br>
+        Сумма сделки: ${circle.amount} ₽<br>
+        Чистая прибыль: ${circle.netProfit} ₽<br>
+        Комиссия: ${circle.fee} ₽
+        <button style="position:absolute; top:10px; right:10px; background:#e74c3c; color:#fff; border:none; border-radius:5px; cursor:pointer;" onclick="deleteCircle('${selectedDate}', ${index})">Удалить</button>
+      `;
 
-      // Вывод полей круга с русскими заголовками
-      for (const key in circle) {
-  const p = doc.createElement('p');
-  const label = fieldNames[key] || key; // точное совпадение по ключу
-  p.textContent = `${label}: ${circle[key]}`;
-  div.appendChild(p);
-}
-
-
-      // Кнопка удаления
-      const deleteBtn = doc.createElement('button');
-      deleteBtn.textContent = 'Удалить';
-      deleteBtn.style.position = 'absolute';
-      deleteBtn.style.top = '12px';
-      deleteBtn.style.right = '12px';
-      deleteBtn.style.backgroundColor = '#e74c3c';
-      deleteBtn.style.color = 'white';
-      deleteBtn.style.border = 'none';
-      deleteBtn.style.borderRadius = '6px';
-      deleteBtn.style.padding = '5px 10px';
-      deleteBtn.style.cursor = 'pointer';
-      deleteBtn.addEventListener('click', () => {
-        if (confirm(`Удалить сделку №${idx + 1}?`)) {
-          dayStats.splice(idx, 1); // удалить круг из массива
-          stats[selectedDate] = dayStats; // обновить данные
-          localStorage.setItem('stats', JSON.stringify(stats));
-          renderCircles(); // обновить список в окне
-        }
-      });
-
-      div.appendChild(deleteBtn);
       container.appendChild(div);
     });
   }
 
-  renderCircles();
+  // Показать экран кругов и скрыть календарь
+  document.getElementById('calendarScreen').style.display = 'none';
+  document.getElementById('circlesScreen').style.display = 'flex';
 }
+
+function closeCirclesScreen() {
+  document.getElementById('circlesScreen').style.display = 'none';
+  document.getElementById('calendarScreen').style.display = 'flex';
+}
+
+// Удаление круга по индексу и обновление localStorage
+function deleteCircle(date, index) {
+  if (!confirm(`Удалить круг №${index + 1} за дату ${date}?`)) return;
+
+  const stats = JSON.parse(localStorage.getItem('stats')) || {};
+  if (!stats[date]) return;
+
+  stats[date].splice(index, 1); // удалить круг по индексу
+
+  if (stats[date].length === 0) {
+    delete stats[date]; // удалить дату если пусто
+  }
+
+  localStorage.setItem('stats', JSON.stringify(stats));
+  openCirclesWindow(); // обновить список
+}
+
+
+
 
 
   if (dayStats.length === 0) {
