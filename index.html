@@ -528,16 +528,35 @@ function goToCalculator() {
 }
 
 
-    function toggleTheme() {
-      const body = document.body;
-      if (body.classList.contains('dark')) {
-        body.classList.replace('dark', 'light');
-        localStorage.setItem('theme', 'light');
-      } else {
-        body.classList.replace('light', 'dark');
-        localStorage.setItem('theme', 'dark');
-      }
-    }
+function toggleTheme() {
+  const body = document.body;
+  if (body.classList.contains('dark')) {
+    body.classList.replace('dark', 'light');
+    localStorage.setItem('theme', 'light');
+  } else {
+    body.classList.replace('light', 'dark');
+    localStorage.setItem('theme', 'dark');
+  }
+  
+  // Принудительное обновление цветов при переключении
+  updateHeaderColors();
+}
+
+// Новая функция для обновления цветов заголовков
+function updateHeaderColors() {
+  const isDark = document.body.classList.contains('dark');
+  const color = isDark ? 'white' : 'black';
+  
+  document.querySelectorAll('.calendar-header, .summary-card h3, .summary-card h4').forEach(el => {
+    el.style.color = color;
+  });
+}
+
+// Вызываем при загрузке страницы
+document.addEventListener("DOMContentLoaded", () => {
+  updateHeaderColors();
+  // ... остальной код инициализации
+});
     function saveCircle() {
   if (!currentCircleData || Object.keys(currentCircleData).length === 0) {
     alert("Сначала сделайте расчёт круга (нажмите 'Рассчитать').");
