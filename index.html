@@ -45,25 +45,24 @@
 
     input[type="number"],
     input[type="date"] {
-  border: 2px solid #1a7dff; /* синяя рамка */
-  width: 100%; /* или другая нужная ширина, например 300px */
-  max-width: 320px;
-  border-radius: 12px;
-  padding: 10px 12px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  background-color: #262626;
-  color: #fff;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
+      border: 2px solid #1a7dff;
+      width: 100%;
+      max-width: 320px;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      background-color: #262626;
+      color: #fff;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
 
-input[type="date"]:focus {
-  border-color: #1a7dff;
-  outline: none;
-  box-shadow: 0 0 8px #1a7dff;
-}
-
+    input[type="date"]:focus {
+      border-color: #1a7dff;
+      outline: none;
+      box-shadow: 0 0 8px #1a7dff;
+    }
 
     input:focus {
       outline: none;
@@ -100,91 +99,90 @@ input[type="date"]:focus {
     }
 
     .calendar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px 20px;
-  color: #fff;
-}
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px;
+      color: #fff;
+    }
 
-.calendar-header {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #1a7dff;
-  text-align: center;
-}
+    .calendar-header {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #1a7dff;
+      text-align: center;
+    }
 
-.calendar-body {
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+    .calendar-body {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-.calendar-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  outline: none;
-}
+    .calendar-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
 
-.calendar-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+    .calendar-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-.calendar-button {
-  padding: 12px;
-  font-size: 1rem;
-  background-color: #1a7dff;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.calendar-button:hover {
-  background-color: #1a7dff;
-}
+    .calendar-button {
+      padding: 12px;
+      font-size: 1rem;
+      background-color: #1a7dff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .calendar-button:hover {
+      background-color: #1a7dff;
+    }
 
-.calendar-button.cancel {
-  background-color: #f44336;
-}
-.calendar-button.cancel:hover {
-  background-color: #d32f2f;
-}
+    .calendar-button.cancel {
+      background-color: #f44336;
+    }
+    .calendar-button.cancel:hover {
+      background-color: #d32f2f;
+    }
 
-.summary-card {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  text-align: center;
-  backdrop-filter: blur(6px);
-}
+    .summary-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
 
-.summary-card h3 {
-  margin-bottom: 10px;
-  font-size: 1.4rem;
-  color: #e9f2fd;
-}
+    .summary-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+      color: #e9f2fd;
+    }
 
-.calendar-period {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+    .calendar-period {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-.calendar-footer {
-  margin-top: 30px;
-}
-
+    .calendar-footer {
+      margin-top: 30px;
+    }
 
     .circle {
       margin-bottom: 10px;
@@ -196,12 +194,75 @@ input[type="date"]:focus {
       background-color: #333;
     }
 
+    /* PRO калькулятор стили */
+    #proScreen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px;
+      color: #fff;
+    }
+
+    .pro-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+      margin-bottom: 20px;
+      max-width: 500px;
+    }
+
+    .pro-table th {
+      background-color: #1a7dff;
+      color: white !important;
+      font-weight: 600;
+      padding: 12px 10px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .pro-table tr {
+      background-color: #1e1e1e;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      border-radius: 12px;
+    }
+
+    .pro-table td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .pro-input {
+      width: 110px;
+      padding: 8px 10px;
+      border: 2px solid #1a7dff;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      background-color: #262626;
+      color: #fff;
+      outline-offset: 2px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .remove-btn {
+      padding: 6px 14px;
+      border-radius: 12px;
+      background-color: #ff5252;
+      border: none;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
     /* Theme-specific styles */
     body.dark input,
     body.dark .result,
     body.dark .calendar,
     body.dark .circle,
-    body.dark input[type="date"] {
+    body.dark input[type="date"],
+    body.dark .pro-table tr {
       background-color: #1e1e1e;
       color: #ffffff;
       box-shadow: inset 0 0 5px #2c2c2c;
@@ -219,7 +280,8 @@ input[type="date"]:focus {
     body.light .result,
     body.light .calendar,
     body.light .circle,
-    body.light input[type="date"] {
+    body.light input[type="date"],
+    body.light .pro-table tr {
       background-color: #ffffff;
       color: #111111;
       box-shadow: inset 0 0 5px #cccccc;
@@ -232,20 +294,90 @@ input[type="date"]:focus {
     body.light .circle:hover {
       background-color: #dddddd;
     }
+    
+    /* PRO button styles */
+    .pro-button {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ff8a00, #ff5e00);
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .pro-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    .title-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Новые стили для цветов текста в зависимости от темы */
+    body.dark .pro-table td,
+    body.dark .pro-input,
+    body.dark #spreadResult,
+    body.dark #spreadResult h3,
+    body.dark #spreadResult p {
+      color: #ffffff;
+    }
+
+    body.light .pro-table td,
+    body.light .pro-input,
+    body.light #spreadResult,
+    body.light #spreadResult h3,
+    body.light #spreadResult p {
+      color: #111111;
+    }
+    
+    body.dark #proScreen h3 {
+      color: #ffffff;
+    }
+
+    body.light #proScreen h3 {
+      color: #111111;
+    }
+    
+    body.dark #proScreen .calendar-header {
+      color: #ffffff;
+    }
+
+    body.light #proScreen .calendar-header {
+      color: #111111;
+    }
+    
+    .save-pro-btn {
+      background-color: #4CAF50 !important;
+      margin-top: 15px;
+    }
+    
+    .pro-circle {
+      border-left: 4px solid #ff8a00;
+    }
   </style>
 </head>
 <body class="dark">
   <div class="container">
     <div id="calculatorScreen">
-      <h2>Ивановский P2P</h2>
+      <div class="title-container">
+        <h2>Ивановский P2P</h2>
+        <button class="pro-button" onclick="openProCalculator()">PRO</button>
+      </div>
       <div style="display: flex; align-items: center; justify-content: space-between;">
         <button onclick="toggleTheme()" style="font-size: 18px; padding: 6px 10px; border-radius: 8px; border: none; background: #444; color: #fff; cursor: pointer; margin-right: 10px; margin-left: 15px;position: relative; top: -50px;">
           🌓
         </button>
         <h2 style="margin: 0; flex-grow: 1; text-align: center;"></h2>
-        <div style="width: 40px;"></div> <!-- Пустышка справа для баланса -->
+        <div style="width: 40px;"></div>
       </div>
-      
 
       <div class="input-group">
         <label for="buyRate">Курс покупки</label>
@@ -309,73 +441,85 @@ input[type="date"]:focus {
       <div class="calendar-footer">
         <button onclick="goToCalculator()" class="calendar-button cancel">Закрыть</button>
       </div>
-    
-    
-
     </div>
-    <!-- Добавляем новый экран кругов -->
-<div class="calendar" id="circlesScreen" style="display: none; flex-direction: column;">
-  <div class="calendar-header">
-    <h3>Круги за выбранный день</h3>
-  </div>
-  <div id="circlesContainer" style="overflow-y: auto; max-height: 400px; padding: 10px;"></div>
-  <div class="calendar-footer">
-    <button onclick="closeCirclesScreen()" class="center-button" style="background-color: gray;">Закрыть</button>
-  </div>
-</div>
 
+    <div class="calendar" id="circlesScreen" style="display: none; flex-direction: column;">
+      <div class="calendar-header">
+        <h3>Круги за выбранный день</h3>
+      </div>
+      <div id="circlesContainer" style="overflow-y: auto; max-height: 400px; padding: 10px;"></div>
+      <div class="calendar-footer">
+        <button onclick="closeCirclesScreen()" class="center-button" style="background-color: gray;">Закрыть</button>
+      </div>
+    </div>
+
+    <!-- Новый экран PRO калькулятора -->
+    <div id="proScreen" class="calendar">
+      <div class="calendar-header">Калькулятор среднего спреда</div>
+    
+      <div class="calendar-body">
+        <h3>Сделки на покупку</h3>
+        <table id="buyTable" class="pro-table">
+          <thead>
+            <tr>
+              <th>Сумма (₽)</th>
+              <th>Курс (₽/USD)</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <button onclick="addRow('buyTable')" class="calendar-button">Добавить сделку покупки</button>
+        
+        <h3>Сделки на продажу</h3>
+        <table id="sellTable" class="pro-table">
+          <thead>
+            <tr>
+              <th>Сумма (₽)</th>
+              <th>Курс (₽/USD)</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <button onclick="addRow('sellTable')" class="calendar-button">Добавить сделку продажи</button>
+        
+        <button onclick="calculateSpread()" class="calendar-button">Посчитать средний спред</button>
+        
+        <div class="summary-card" id="spreadResult">
+          <h3>Результаты:</h3>
+          <p>Средневзвешенный курс покупки: —</p>
+          <p>Средневзвешенный курс продажи: —</p>
+          <p>Прибыль (рублей): —</p>
+          <p>Средний спред (%): —</p>
+        </div>
+        
+        <button onclick="saveSpreadResults()" class="calendar-button save-pro-btn" id="saveProBtn" style="display: none;">Сохранить в статистику</button>
+      </div>
+    
+      <div class="calendar-footer">
+        <button onclick="goToCalculator()" class="calendar-button cancel">Закрыть</button>
+      </div>
+    </div>
   </div>
 
   <script>
     function getTodayDate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = (today.getMonth() + 1).toString().padStart(2, '0');
-  const day = today.getDate().toString().padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const theme = localStorage.getItem("theme") || "dark";
-  document.body.classList.add(theme);
-
-  const savedDate = localStorage.getItem("lastSelectedDate");
-  const defaultDate = getTodayDate();
-  const dateToSet = savedDate || defaultDate;
-
-  ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
-    const savedValue = localStorage.getItem(id);
-    if (savedValue !== null) {
-      document.getElementById(id).value = savedValue;
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = (today.getMonth() + 1).toString().padStart(2, '0');
+      const day = today.getDate().toString().padStart(2, '0');
+      return `${year}-${month}-${day}`;
     }
-  });
-
-  document.getElementById('calendarDate').value = dateToSet;
-  document.getElementById('startDate').value = dateToSet;
-  document.getElementById('endDate').value = dateToSet;
-
-  ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
-    const input = document.getElementById(id);
-    input.addEventListener('input', () => {
-      localStorage.setItem(id, input.value);
-    });
-  });
-});
 
     document.addEventListener("DOMContentLoaded", () => {
       const theme = localStorage.getItem("theme") || "dark";
       document.body.classList.add(theme);
 
       const savedDate = localStorage.getItem("lastSelectedDate");
-const defaultDate = getTodayDate();
-const dateToSet = savedDate || defaultDate;
+      const defaultDate = getTodayDate();
+      const dateToSet = savedDate || defaultDate;
 
-document.getElementById('calendarDate').value = dateToSet;
-document.getElementById('startDate').value = dateToSet;
-document.getElementById('endDate').value = dateToSet;
-
-      
-      
       ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
         const savedValue = localStorage.getItem(id);
         if (savedValue !== null) {
@@ -387,7 +531,6 @@ document.getElementById('endDate').value = dateToSet;
       document.getElementById('startDate').value = dateToSet;
       document.getElementById('endDate').value = dateToSet;
 
-      // Автоматическое сохранение введённых данных
       ['buyRate', 'sellRate', 'amount', 'fee'].forEach(id => {
         const input = document.getElementById(id);
         input.addEventListener('input', () => {
@@ -397,356 +540,362 @@ document.getElementById('endDate').value = dateToSet;
     });
 
     let currentCircleData = {};
-
-    function saveStatistics(date, circleData) {
-      const stats = JSON.parse(localStorage.getItem('stats')) || {};
-      if (!stats[date]) stats[date] = [];
-      stats[date].push(circleData);
-      localStorage.setItem('stats', JSON.stringify(stats));
-    }
+    let currentSpreadData = {};
 
     function calculate() {
-  const buyRate = parseFloat(document.getElementById('buyRate').value);
-  const sellRate = parseFloat(document.getElementById('sellRate').value);
-  const amount = parseFloat(document.getElementById('amount').value);
-  const feePercent = parseFloat(document.getElementById('fee').value);
+      const buyRate = parseFloat(document.getElementById('buyRate').value);
+      const sellRate = parseFloat(document.getElementById('sellRate').value);
+      const amount = parseFloat(document.getElementById('amount').value);
+      const feePercent = parseFloat(document.getElementById('fee').value);
 
-  if (isNaN(buyRate) || isNaN(sellRate) || isNaN(amount) || isNaN(feePercent)) {
-    alert("Пожалуйста, заполните все поля корректно.");
-    return;
-  }
+      if (isNaN(buyRate) || isNaN(sellRate) || isNaN(amount) || isNaN(feePercent)) {
+        alert("Пожалуйста, заполните все поля корректно.");
+        return;
+      }
 
-  const usdtBought = amount / buyRate;
-  const grossRubles = usdtBought * sellRate;
-  const fee = grossRubles * (feePercent / 100);
-  const netProfit = grossRubles - amount - fee;
+      const usdtBought = amount / buyRate;
+      const grossRubles = usdtBought * sellRate;
+      const fee = grossRubles * (feePercent / 100);
+      const netProfit = grossRubles - amount - fee;
+      const realSpread = (netProfit / amount) * 100;
 
-  const realSpread = (netProfit / amount) * 100;
+      const resultDiv = document.getElementById('result');
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = `
+        <strong>Вы купили:</strong> ${usdtBought.toFixed(2)} USDT<br>
+        <strong>Продажа даёт:</strong> ${grossRubles.toFixed(2)} ₽<br>
+        <strong>Комиссия:</strong> ${fee.toFixed(2)} ₽<br>
+        <strong>Чистая прибыль:</strong> ${netProfit.toFixed(2)} ₽<br>
+        <strong>Спред:</strong> ${realSpread.toFixed(2)}%
+      `;
 
-  const resultDiv = document.getElementById('result');
-  resultDiv.style.display = 'block';
-  resultDiv.innerHTML = `
-    <strong>Вы купили:</strong> ${usdtBought.toFixed(2)} USDT<br>
-    <strong>Продажа даёт:</strong> ${grossRubles.toFixed(2)} ₽<br>
-    <strong>Комиссия:</strong> ${fee.toFixed(2)} ₽<br>
-    <strong>Чистая прибыль:</strong> ${netProfit.toFixed(2)} ₽<br>
-    <strong>Спред:</strong> ${realSpread.toFixed(2)}%
-  `;
+      currentCircleData = {
+        buyRate: buyRate,
+        sellRate: sellRate,
+        spread: parseFloat(realSpread.toFixed(2)),
+        amount: amount,
+        netProfit: parseFloat(netProfit.toFixed(2)),
+        fee: parseFloat(fee.toFixed(2)),
+        type: "simple"
+      };
 
-  currentCircleData = {
-    buyRate: buyRate,
-    sellRate: sellRate,
-    spread: parseFloat(realSpread.toFixed(2)),
-    amount: amount,
-    netProfit: parseFloat(netProfit.toFixed(2)),
-    fee: parseFloat(fee.toFixed(2))
-  };
+      resultDiv.scrollIntoView({ behavior: 'smooth' });
+    }
 
-  resultDiv.scrollIntoView({ behavior: 'smooth' });
-}
+    function saveCircle() {
+      if (!currentCircleData || Object.keys(currentCircleData).length === 0) {
+        alert("Сначала сделайте расчёт круга (нажмите 'Рассчитать').");
+        return;
+      }
 
-function showDayProfit() {
-  const selectedDate = document.getElementById('calendarDate').value;
-  if (!selectedDate) {
-    alert("Пожалуйста, выберите дату.");
-    return;
-  }
+      const today = new Date().toISOString().slice(0, 10);
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
 
-  const stats = JSON.parse(localStorage.getItem('stats')) || {};
-  const dayStats = stats[selectedDate] || [];
+      if (!stats[today]) {
+        stats[today] = [];
+      }
 
-  const totalProfit = dayStats.reduce((sum, p) => {
-    const val = parseFloat(p.netProfit);
-    return sum + (isNaN(val) ? 0 : val);
-  }, 0);
-  const totalCircles = dayStats.length;
+      stats[today].push(currentCircleData);
+      localStorage.setItem('stats', JSON.stringify(stats));
+      alert("Круг успешно сохранён!");
+    }
 
-  const dayProfitDiv = document.getElementById('dayProfit');
-  dayProfitDiv.innerHTML = `
-    <h4>Итоги за ${selectedDate}:</h4>
-    <p>Сделок: ${totalCircles}</p>
-    <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
-  `;
-}
-function getTodayDate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = (today.getMonth() + 1).toString().padStart(2, '0');
-  const day = today.getDate().toString().padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
+    function showDayProfit() {
+      const selectedDate = document.getElementById('calendarDate').value;
+      if (!selectedDate) {
+        alert("Пожалуйста, выберите дату.");
+        return;
+      }
 
-function showPeriodProfit() {
-  const startDate = document.getElementById('startDate').value;
-  const endDate = document.getElementById('endDate').value;
-
-  if (!startDate || !endDate) {
-    alert("Пожалуйста, выберите обе даты.");
-    return;
-  }
-
-  const stats = JSON.parse(localStorage.getItem('stats')) || {};
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  let totalProfit = 0;
-  let totalCircles = 0;
-
-  for (const dateStr in stats) {
-    const d = new Date(dateStr);
-    if (d >= start && d <= end) {
-      stats[dateStr].forEach(c => {
-        const val = parseFloat(c.netProfit);
-        if (!isNaN(val)) {
-          totalProfit += val;
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      const dayStats = stats[selectedDate] || [];
+      
+      let totalProfit = 0;
+      let totalCircles = 0;
+      
+      dayStats.forEach(deal => {
+        if (deal.netProfit) {
+          totalProfit += parseFloat(deal.netProfit);
           totalCircles++;
         }
       });
+
+      document.getElementById('dayProfit').innerHTML = `
+        <h4>Итоги за ${selectedDate}:</h4>
+        <p>Сделок: ${totalCircles}</p>
+        <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
+      `;
     }
-  }
 
-  const periodProfitDiv = document.getElementById('periodProfit');
-  periodProfitDiv.innerHTML = `
-    <h4>Итоги за период ${startDate} - ${endDate}:</h4>
-    <p>Сделок: ${totalCircles}</p>
-    <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
-  `;
-}
+    function showPeriodProfit() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
 
-        
-    
+      if (!startDate || !endDate) {
+        alert("Пожалуйста, выберите обе даты.");
+        return;
+      }
+
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      let totalProfit = 0;
+      let totalCircles = 0;
+
+      for (const dateStr in stats) {
+        const d = new Date(dateStr);
+        if (d >= start && d <= end) {
+          stats[dateStr].forEach(c => {
+            if (c.netProfit) {
+              const val = parseFloat(c.netProfit);
+              if (!isNaN(val)) {
+                totalProfit += val;
+                totalCircles++;
+              }
+            }
+          });
+        }
+      }
+
+      document.getElementById('periodProfit').innerHTML = `
+        <h4>Итоги за период ${startDate} - ${endDate}:</h4>
+        <p>Сделок: ${totalCircles}</p>
+        <p>Чистая прибыль: ${totalProfit.toFixed(2)} ₽</p>
+      `;
+    }
 
     function goToCalendar() {
-  document.getElementById('calculatorScreen').style.display = 'none';
-  document.getElementById('calendarScreen').style.display = 'flex';
-  document.getElementById('result').style.display = 'none';
-}
-
-function goToCalculator() {
-  document.getElementById('calendarScreen').style.display = 'none';
-  document.getElementById('calculatorScreen').style.display = 'block';
-  document.getElementById('result').style.display = 'none';
-}
-
-
-function toggleTheme() {
-  const body = document.body;
-  if (body.classList.contains('dark')) {
-    body.classList.replace('dark', 'light');
-    localStorage.setItem('theme', 'light');
-  } else {
-    body.classList.replace('light', 'dark');
-    localStorage.setItem('theme', 'dark');
-  }
-  
-  // Принудительное обновление цветов при переключении
-  updateHeaderColors();
-}
-
-// Новая функция для обновления цветов заголовков
-function updateHeaderColors() {
-  const isDark = document.body.classList.contains('dark');
-  const color = isDark ? 'white' : 'black';
-  
-  document.querySelectorAll('.calendar-header, .summary-card h3, .summary-card h4').forEach(el => {
-    el.style.color = color;
-  });
-}
-
-// Вызываем при загрузке страницы
-document.addEventListener("DOMContentLoaded", () => {
-  updateHeaderColors();
-  // ... остальной код инициализации
-});
-    function saveCircle() {
-  if (!currentCircleData || Object.keys(currentCircleData).length === 0) {
-    alert("Сначала сделайте расчёт круга (нажмите 'Рассчитать').");
-    return;
-  }
-
-  // Получаем текущую дату в формате YYYY-MM-DD
-  const today = new Date().toISOString().slice(0, 10);
-
-  // Загружаем уже сохранённые круги из localStorage
-  const stats = JSON.parse(localStorage.getItem('stats')) || {};
-
-  // Если для текущей даты ещё нет массива — создаём его
-  if (!stats[today]) {
-    stats[today] = [];
-  }
-
-  // Добавляем текущий круг
-  stats[today].push(currentCircleData);
-
-  // Сохраняем обратно в localStorage
-  localStorage.setItem('stats', JSON.stringify(stats));
-
-  alert("Круг успешно сохранён!");
-}
-
-    function saveSelectedDate() {
-      const selectedDate = document.getElementById('calendarDate').value;
-      localStorage.setItem('lastSelectedDate', selectedDate);
+      document.getElementById('calculatorScreen').style.display = 'none';
+      document.getElementById('calendarScreen').style.display = 'flex';
+      document.getElementById('result').style.display = 'none';
+      document.getElementById('circlesScreen').style.display = 'none';
+      document.getElementById('proScreen').style.display = 'none';
     }
 
-    // Новая функция для открытия окна со списком кругов за выбранный день
-    // Функция открытия экрана с кругами за день, вместо открытия нового окна
-   // Функция открытия экрана с кругами за выбранный день
-function openCirclesWindow() {
-  const selectedDate = document.getElementById('calendarDate').value;
-  if (!selectedDate) {
-    alert("Пожалуйста, выберите дату.");
-    return;
-  }
+    function goToCalculator() {
+      document.getElementById('calendarScreen').style.display = 'none';
+      document.getElementById('calculatorScreen').style.display = 'block';
+      document.getElementById('result').style.display = 'none';
+      document.getElementById('circlesScreen').style.display = 'none';
+      document.getElementById('proScreen').style.display = 'none';
+    }
 
-  const stats = JSON.parse(localStorage.getItem('stats')) || {};
-  const dayStats = stats[selectedDate] || [];
+    function toggleTheme() {
+      const body = document.body;
+      if (body.classList.contains('dark')) {
+        body.classList.replace('dark', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.classList.replace('light', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateHeaderColors();
+    }
 
-  const container = document.getElementById('circlesContainer');
-  container.innerHTML = ''; // очистить перед заполнением
-
-  if (dayStats.length === 0) {
-    container.innerHTML = '<p style="text-align:center;">Круги за этот день не найдены.</p>';
-  } else {
-    dayStats.forEach((circle, index) => {
-      const div = document.createElement('div');
-      div.className = 'circle';
-      div.style.position = 'relative';
-      div.style.paddingRight = '40px';
-
-      div.innerHTML = `
-        <strong>Круг #${index + 1}</strong><br>
-        Курс покупки: ${circle.buyRate}<br>
-        Курс продажи: ${circle.sellRate}<br>
-        Спред: ${circle.spread}%<br>
-        Сумма сделки: ${circle.amount} ₽<br>
-        Чистая прибыль: ${circle.netProfit} ₽<br>
-        Комиссия: ${circle.fee} ₽
-        <button style="
-          position:absolute; 
-          top:10px; 
-          right:10px; 
-          background:#e74c3c; 
-          color:#fff; 
-          border:none; 
-          border-radius:5px; 
-          cursor:pointer;
-          padding: 5px 10px;
-        " onclick="deleteCircle('${selectedDate}', ${index})">Удалить</button>
-      `;
-
-      container.appendChild(div);
-    });
-  }
-
-  // Показать экран кругов и скрыть календарь
-  document.getElementById('calendarScreen').style.display = 'none';
-  document.getElementById('circlesScreen').style.display = 'flex';
-}
-
-// Функция закрытия экрана с кругами
-function closeCirclesScreen() {
-  document.getElementById('circlesScreen').style.display = 'none';
-  document.getElementById('calendarScreen').style.display = 'flex';
-}
-
-// Функция удаления круга по индексу
-function deleteCircle(date, index) {
-  if (!confirm('Вы уверены, что хотите удалить этот круг?')) return;
-
-  const stats = JSON.parse(localStorage.getItem('stats')) || {};
-  if (!stats[date]) return;
-
-  // Удаляем элемент из массива
-  stats[date].splice(index, 1);
-
-  // Если после удаления массив пуст, удаляем ключ с датой
-  if (stats[date].length === 0) {
-    delete stats[date];
-  }
-
-  localStorage.setItem('stats', JSON.stringify(stats));
-
-  // Обновляем список кругов
-  openCirclesWindow();
-
-  // Можно обновить статистику за день, если она показана
-  showDayProfit();
-}
-
-
-
-
-
-
-  if (dayStats.length === 0) {
-    const p = doc.createElement('p');
-    p.textContent = 'За этот день нет сохранённых кругов.';
-    p.style.fontStyle = 'italic';
-    p.style.textAlign = 'center';
-    p.style.marginTop = '30px';
-    doc.body.appendChild(p);
-  } else {
-    dayStats.forEach((circle, idx) => {
-      const div = doc.createElement('div');
-      div.style.border = '1px solid #ddd';
-      div.style.padding = '12px';
-      div.style.borderRadius = '10px';
-      div.style.marginBottom = '10px';
-      div.style.backgroundColor = '#ffffff';
-      div.style.boxShadow = '2px 2px 8px rgba(0,0,0,0.05)';
-
-      const h3 = doc.createElement('h3');
-      h3.textContent = `Сделка №${idx + 1}`;
-      h3.style.marginTop = '0';
-      h3.style.marginBottom = '6px';
-      div.appendChild(h3);
-
-      const fields = [
-        ['Курс покупки', circle.buyRate],
-        ['Курс продажи', circle.sellRate],
-        ['Спред (%)', circle.spread],
-        ['Сумма сделки (₽)', circle.amount],
-        ['Чистая прибыль (₽)', circle.netProfit],
-        ['Комиссия (₽)', circle.fee]
-      ];
-
-      fields.forEach(([label, value]) => {
-        const p = doc.createElement('p');
-        p.innerHTML = `<strong>${label}:</strong> ${value}`;
-        p.style.margin = '2px 0';
-        div.appendChild(p);
+    function updateHeaderColors() {
+      const isDark = document.body.classList.contains('dark');
+      const color = isDark ? 'white' : 'black';
+      document.querySelectorAll('.calendar-header, .summary-card h3, .summary-card h4').forEach(el => {
+        el.style.color = color;
       });
+    }
 
-      doc.body.appendChild(div);
-    });
-  }
+    function openCirclesWindow() {
+      const selectedDate = document.getElementById('calendarDate').value;
+      if (!selectedDate) {
+        alert("Пожалуйста, выберите дату.");
+        return;
+      }
 
-  const btn = doc.createElement('button');
-  btn.textContent = 'Закрыть окно';
-  btn.style.marginTop = '20px';
-  btn.style.padding = '10px 20px';
-  btn.style.fontSize = '16px';
-  btn.style.border = 'none';
-  btn.style.borderRadius = '8px';
-  btn.style.backgroundColor = '#5f27cd';
-  btn.style.color = 'white';
-  btn.style.cursor = 'pointer';
-  btn.style.display = 'block';
-  btn.style.marginLeft = 'auto';
-  btn.style.marginRight = 'auto';
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      const dayStats = stats[selectedDate] || [];
+      const container = document.getElementById('circlesContainer');
+      container.innerHTML = '';
 
-  btn.onmouseover = () => btn.style.backgroundColor = '#4b1ea0';
-  btn.onmouseout = () => btn.style.backgroundColor = '#5f27cd';
+      if (dayStats.length === 0) {
+        container.innerHTML = '<p style="text-align:center;">Круги за этот день не найдены.</p>';
+      } else {
+        dayStats.forEach((circle, index) => {
+          const div = document.createElement('div');
+          div.className = circle.type === "pro" ? 'circle pro-circle' : 'circle';
+          div.style.position = 'relative';
+          div.style.paddingRight = '40px';
 
-  btn.onclick = () => newWindow.close();
+          let content = '';
+          if (circle.type === "pro") {
+              content = `
+                  <strong>PRO круг #${index + 1}</strong><br>
+                  Средний курс покупки: ${circle.buyRate.toFixed(4)} ₽/USD<br>
+                  Средний курс продажи: ${circle.sellRate.toFixed(4)} ₽/USD<br>
+                  Спред: ${circle.spread.toFixed(2)}%<br>
+                  Общая сумма: ${circle.amount.toFixed(2)} ₽<br>
+                  Чистая прибыль: ${circle.netProfit.toFixed(2)} ₽
+              `;
+          } else {
+              content = `
+                  <strong>Круг #${index + 1}</strong><br>
+                  Курс покупки: ${circle.buyRate} ₽/USD<br>
+                  Курс продажи: ${circle.sellRate} ₽/USD<br>
+                  Спред: ${circle.spread}%<br>
+                  Сумма сделки: ${circle.amount} ₽<br>
+                  Чистая прибыль: ${circle.netProfit} ₽<br>
+                  ${circle.fee ? `Комиссия: ${circle.fee} ₽` : ''}
+              `;
+          }
 
-  doc.body.appendChild(btn);
+          div.innerHTML = content + `
+              <button style="
+                  position:absolute; 
+                  top:10px; 
+                  right:10px; 
+                  background:#e74c3c; 
+                  color:#fff; 
+                  border:none; 
+                  border-radius:5px; 
+                  cursor:pointer;
+                  padding: 5px 10px;
+              " onclick="deleteCircle('${selectedDate}', ${index})">Удалить</button>
+          `;
+          container.appendChild(div);
+        });
+      }
 
-{
+      document.getElementById('calendarScreen').style.display = 'none';
+      document.getElementById('circlesScreen').style.display = 'flex';
+    }
 
-      const newWindow = window.open('', '_blank', 'width=500,height=600');
-      newWindow.document.write(html);
-      newWindow.document.close();
+    function closeCirclesScreen() {
+      document.getElementById('circlesScreen').style.display = 'none';
+      document.getElementById('calendarScreen').style.display = 'flex';
+    }
+
+    function deleteCircle(date, index) {
+      if (!confirm('Вы уверены, что хотите удалить этот круг?')) return;
+
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      if (!stats[date]) return;
+
+      stats[date].splice(index, 1);
+      if (stats[date].length === 0) {
+        delete stats[date];
+      }
+
+      localStorage.setItem('stats', JSON.stringify(stats));
+      openCirclesWindow();
+      showDayProfit();
+    }
+
+    // Функции для PRO калькулятора
+    function openProCalculator() {
+      document.getElementById('calculatorScreen').style.display = 'none';
+      document.getElementById('calendarScreen').style.display = 'none';
+      document.getElementById('circlesScreen').style.display = 'none';
+      document.getElementById('proScreen').style.display = 'flex';
+      document.getElementById('result').style.display = 'none';
+      
+      // Инициализация таблиц при первом открытии
+      if (document.querySelectorAll('#buyTable tbody tr').length === 0) {
+        addRow('buyTable');
+        addRow('sellTable');
+      }
+    }
+    
+    function addRow(tableId) {
+      const tbody = document.querySelector(`#${tableId} tbody`);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="number" class="pro-input" min="0" step="0.01" placeholder="Сумма ₽" required></td>
+        <td><input type="number" class="pro-input" min="0" step="0.0001" placeholder="Курс ₽/USD" required></td>
+        <td><button class="remove-btn" onclick="removeRow(this)">Удалить</button></td>
+      `;
+      tbody.appendChild(tr);
+    }
+    
+    function removeRow(button) {
+      const tr = button.closest('tr');
+      tr.remove();
+    }
+    
+    function calculateSpread() {
+      const buyRows = document.querySelectorAll('#buyTable tbody tr');
+      let S_pokupka = 0, USD_pokupka = 0;
+
+      for (const row of buyRows) {
+        const sum = parseFloat(row.cells[0].querySelector('input').value);
+        const rate = parseFloat(row.cells[1].querySelector('input').value);
+        if (isNaN(sum) || isNaN(rate) || sum <= 0 || rate <= 0) continue;
+        S_pokupka += sum;
+        USD_pokupka += sum / rate;
+      }
+
+      if (USD_pokupka === 0) {
+        alert('Введите хотя бы одну корректную сделку покупки');
+        return;
+      }
+
+      const K_pokupka = S_pokupka / USD_pokupka;
+
+      const sellRows = document.querySelectorAll('#sellTable tbody tr');
+      let S_prodazha = 0, USD_prodazha = 0;
+
+      for (const row of sellRows) {
+        const sum = parseFloat(row.cells[0].querySelector('input').value);
+        const rate = parseFloat(row.cells[1].querySelector('input').value);
+        if (isNaN(sum) || isNaN(rate) || sum <= 0 || rate <= 0) continue;
+        S_prodazha += sum;
+        USD_prodazha += sum / rate;
+      }
+
+      if (USD_prodazha === 0) {
+        alert('Введите хотя бы одну корректную сделку продажи');
+        return;
+      }
+
+      const K_prodazha = S_prodazha / USD_prodazha;
+      const profit = S_prodazha - USD_prodazha * K_pokupka;
+      const spreadPercent = (profit / S_prodazha) * 100;
+
+      document.getElementById('spreadResult').innerHTML = `
+        <h3>Результаты:</h3>
+        <p>Средневзвешенный курс покупки: ${K_pokupka.toFixed(4)} ₽/USD</p>
+        <p>Средневзвешенный курс продажи: ${K_prodazha.toFixed(4)} ₽/USD</p>
+        <p>Прибыль (рублей): ${profit.toFixed(2)} ₽</p>
+        <p>Средний спред (%): ${spreadPercent.toFixed(2)}%</p>
+      `;
+      
+      // Сохраняем данные для возможного сохранения
+      currentSpreadData = {
+        buyRate: parseFloat(K_pokupka.toFixed(4)),
+        sellRate: parseFloat(K_prodazha.toFixed(4)),
+        spread: parseFloat(spreadPercent.toFixed(2)),
+        amount: parseFloat(S_prodazha.toFixed(2)),
+        netProfit: parseFloat(profit.toFixed(2)),
+        type: "pro"
+      };
+      
+      // Показываем кнопку сохранения
+      document.getElementById('saveProBtn').style.display = 'block';
+    }
+    
+    function saveSpreadResults() {
+      if (!currentSpreadData || Object.keys(currentSpreadData).length === 0) {
+        alert("Сначала сделайте расчёт (нажмите 'Посчитать средний спред')");
+        return;
+      }
+
+      const today = new Date().toISOString().slice(0, 10);
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+
+      if (!stats[today]) {
+        stats[today] = [];
+      }
+
+      stats[today].push(currentSpreadData);
+      localStorage.setItem('stats', JSON.stringify(stats));
+      alert("PRO расчет успешно сохранён в статистику!");
+      
+      // Скрываем кнопку после сохранения
+      document.getElementById('saveProBtn').style.display = 'none';
     }
   </script>
 </body>
