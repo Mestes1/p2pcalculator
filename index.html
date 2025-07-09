@@ -689,6 +689,71 @@ body.light #circlesScreen #circlesDate {
   font-weight: 600;
   transition: color 0.3s ease;
 }
+/* Стили для поиска банков */
+.bank-search-container {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.bank-search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ff8a00;
+  border-radius: 8px;
+  background-color: #262626;
+  color: white;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.bank-search-input:focus {
+  border-color: #ff8a00;
+  box-shadow: 0 0 0 2px rgba(255, 138, 0, 0.3);
+  outline: none;
+}
+
+.bank-search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  display: none;
+}
+
+.bank-search-dropdown.active {
+  display: block;
+}
+
+.bank-search-results {
+  padding: 5px 0;
+}
+
+.bank-search-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.bank-search-item:hover {
+  background-color: #ff8a00;
+}
+
+.bank-search-item.no-results {
+  color: #999;
+  cursor: default;
+}
+
+.bank-search-item.no-results:hover {
+  background-color: transparent;
+}
 /* ===== КОНЕЦ PRO ОРАНЖЕВОГО СТИЛЯ ===== */
   </style>
 </head>
@@ -844,7 +909,7 @@ body.light #circlesScreen #circlesDate {
       "Сбербанк", "Тинькофф", "ВТБ", "Альфа-Банк", "Газпромбанк", "Райффайзенбанк", 
       "Совкомбанк", "ВБРР", "Россельхозбанк", "МКБ", "АК Барс", 
       "Банк Санкт-Петербург", "ЮниКредит Банк", "РНКБ", "Почта Банк",
-      "Хоум Кредит", "Росгосстрах Банк", "QIWI Банк", "МТС Банк", "Точка",
+      "Хоум Кредит", "Росгосстрах Банк", "Озон Банк", "МТС Банк", "Точка",
       "Авангард", "Сетелем Банк", "Кредит Европа Банк", "Русский Стандарт",
       "Советский", "Дом.РФ", "Энерготрансбанк", "Зенит", "Уралсиб",
       "Банк Русский капитал", "Абсолют Банк", "Экспобанк", "Банк Финсервис",
@@ -866,7 +931,7 @@ body.light #circlesScreen #circlesDate {
       "СИАБ", "СИБЭС", "Синко-Банк", "Славянбанк", "СМП Банк", "Собинбанк",
       "Солидарность", "СПБ Банк", "СтарБанк", "Таврический", "Темпбанк",
       "Унифондбанк", "Финсервис Банк", "Фора-Банк", "Ханты-Мансийский Банк",
-      "Экономбанк", "Экспресс-Волга", "Элита"
+      "Экономбанк", "Экспресс-Волга", "Элита","Яндекс Банк"
     ];
 
     function getTodayDate() {
@@ -1192,7 +1257,7 @@ function declOfNum(n, titles) {
     <td><input type="number" class="pro-input" min="0" step="0.0001" placeholder="Курс ₽/USD" required></td>
     <td>
       <div class="bank-search-container">
-        <input type="text" class="bank-search-input" placeholder="Поиск банка..." autocomplete="off">
+        <input type="text" class="bank-search-input" placeholder="Начните вводить банк..." autocomplete="off">
         <div class="bank-search-dropdown">
           <div class="bank-search-results"></div>
         </div>
@@ -1202,12 +1267,66 @@ function declOfNum(n, titles) {
     <td><button class="remove-btn" onclick="removeRow(this)">Удалить</button></td>
   `;
 
-  // Инициализация поиска банков
   initBankSearch(tr);
-  
   tbody.appendChild(tr);
 }
+function initBankSearch(row) {
+  const container = row.querySelector('.bank-search-container');
+  const input = container.querySelector('.bank-search-input');
+  const dropdown = container.querySelector('.bank-search-dropdown');
+  const results = container.querySelector('.bank-search-results');
+  const hiddenInput = container.querySelector('.selected-bank');
 
+  // Функция обновления результатов поиска
+  const updateResults = (searchTerm = '') => {
+    results.innerHTML = '';
+    
+    const filteredBanks = banksList.filter(bank => 
+      bank.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    
+    if (filteredBanks.length === 0) {
+      results.innerHTML = '<div class="bank-search-item no-results">Банки не найдены</div>';
+    } else {
+      filteredBanks.forEach(bank => {
+        const item = document.createElement('div');
+        item.className = 'bank-search-item';
+        item.textContent = bank;
+        item.addEventListener('click', () => {
+          input.value = bank;
+          hiddenInput.value = bank;
+          dropdown.classList.remove('active');
+        });
+        results.appendChild(item);
+      });
+    }
+  };
+
+  // Обработчики событий
+  input.addEventListener('focus', () => {
+    dropdown.classList.add('active');
+    updateResults();
+  });
+  
+  input.addEventListener('input', (e) => {
+    updateResults(e.target.value);
+  });
+  
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdown.classList.remove('active');
+    }
+  });
+  
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target)) {
+      dropdown.classList.remove('active');
+    }
+  });
+  
+  // Инициализация
+  updateResults();
+}
 function initBankSearch(row) {
   const container = row.querySelector('.bank-search-container');
   const input = container.querySelector('.bank-search-input');
@@ -1264,7 +1383,6 @@ function calculateSpread() {
   let S_pokupka = 0, USD_pokupka = 0;
   const buyBanks = new Set();
 
-  // Обработка строк покупки
   for (const row of buyRows) {
     const sumInput = row.cells[0].querySelector('input');
     const rateInput = row.cells[1].querySelector('input');
