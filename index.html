@@ -415,346 +415,6 @@
   color: #ff8a00;
   margin-bottom: 10px;
 }
-
-/* Стили для выбора банков */
-.bank-search {
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 5px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-select.pro-input {
-  padding: 6px;
-  border: 1px solid #ff8a00;
-  border-radius: 8px;
-  background-color: #262626;
-  color: white;
-  width: 100%;
-  max-width: 200px;
-}
-
-.bank-select-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-/* Стили для поиска банков */
-.bank-search-container {
-  position: relative;
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto;
-}
-
-.bank-search-input {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #ff8a00;
-  border-radius: 8px;
-  background-color: #262626;
-  color: white;
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.bank-search-input:focus {
-  border-color: #ff8a00;
-  box-shadow: 0 0 0 2px rgba(255, 138, 0, 0.3);
-  outline: none;
-}
-
-.bank-search-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  max-height: 300px;
-  overflow-y: auto;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  z-index: 100;
-  display: none;
-}
-
-.bank-search-dropdown.active {
-  display: block;
-}
-
-.bank-search-results {
-  padding: 5px 0;
-}
-
-.bank-search-item {
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.bank-search-item:hover {
-  background-color: #ff8a00;
-}
-
-.bank-search-item.no-results {
-  color: #999;
-  cursor: default;
-}
-
-.bank-search-item.no-results:hover {
-  background-color: transparent;
-}
-.pro-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 8px;
-  margin-bottom: 20px;
-  max-width: 500px;
-  table-layout: fixed; /* Добавляем фиксированную ширину таблицы */
-}
-
-.pro-table th, .pro-table td {
-  padding: 10px;
-  text-align: center;
-  word-wrap: break-word; /* Перенос длинных слов */
-}
-
-.pro-table td {
-  vertical-align: middle; /* Выравнивание по вертикали */
-}
-
-/* Устанавливаем фиксированные ширины для колонок */
-.pro-table th:nth-child(1), .pro-table td:nth-child(1) {
-  width: 30%;
-}
-
-.pro-table th:nth-child(2), .pro-table td:nth-child(2) {
-  width: 25%;
-}
-
-.pro-table th:nth-child(3), .pro-table td:nth-child(3) {
-  width: 35%;
-}
-
-.pro-table th:nth-child(4), .pro-table td:nth-child(4) {
-  width: 20%;
-}
-.bank-search-container {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  max-width: 180px; /* Уменьшаем максимальную ширину */
-}
-
-.bank-search-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ff8a00;
-  border-radius: 8px;
-  background-color: #262626;
-  color: white;
-  font-size: 14px;
-  transition: all 0.2s ease;
-  box-sizing: border-box; /* Учитываем padding в ширине */
-}
-.remove-btn {
-  padding: 6px 10px;
-  border-radius: 12px;
-  background-color: #ff5252;
-  border: none;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  white-space: nowrap; /* Запрещаем перенос текста */
-  width: 100%;
-  box-sizing: border-box;
-}
-/* Стили для экрана кругов */
-.circles-list {
-  overflow-y: auto;
-  max-height: 400px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.day-summary {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 300px;
-  margin: 10px auto 0;
-  font-weight: 600;
-  color: #ff8a00;
-}
-
-.circle {
-  background-color: #262626;
-  border-radius: 12px;
-  padding: 15px;
-  position: relative;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-  border-left: 3px solid #1a7dff;
-}
-
-.circle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.pro-circle {
-  border-left-color: #ff8a00;
-}
-
-.circle-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.circle-title {
-  font-weight: 600;
-  color: #1a7dff;
-}
-
-.pro-circle .circle-title {
-  color: #ff8a00;
-}
-
-.circle-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.circle-item {
-  font-size: 0.9rem;
-}
-
-.circle-item strong {
-  color: #aaa;
-  font-weight: 500;
-}
-
-.delete-circle-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.delete-circle-btn:hover {
-  background: #c0392b;
-}
-
-.empty-circles {
-  text-align: center;
-  padding: 30px;
-  color: #777;
-  font-style: italic;
-}
-/* Стили для заголовка кругов за день */
-body.dark #circlesScreen .calendar-header h3,
-body.dark #circlesScreen #circlesDate {
-  color: white !important;
-}
-
-body.light #circlesScreen .calendar-header h3,
-body.light #circlesScreen #circlesDate {
-  color: black !important;
-}
-
-#circlesScreen .calendar-header h3 {
-  margin-bottom: 10px;
-  transition: color 0.3s ease;
-}
-
-#circlesDate {
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-/* Стили для поиска банков */
-.bank-search-container {
-  position: relative;
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto;
-}
-
-.bank-search-input {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #ff8a00;
-  border-radius: 8px;
-  background-color: #262626;
-  color: white;
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.bank-search-input:focus {
-  border-color: #ff8a00;
-  box-shadow: 0 0 0 2px rgba(255, 138, 0, 0.3);
-  outline: none;
-}
-
-.bank-search-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  max-height: 300px;
-  overflow-y: auto;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  z-index: 100;
-  display: none;
-}
-
-.bank-search-dropdown.active {
-  display: block;
-}
-
-.bank-search-results {
-  padding: 5px 0;
-}
-
-.bank-search-item {
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.bank-search-item:hover {
-  background-color: #ff8a00;
-}
-
-.bank-search-item.no-results {
-  color: #999;
-  cursor: default;
-}
-
-.bank-search-item.no-results:hover {
-  background-color: transparent;
-}
-
 /* ===== КОНЕЦ PRO ОРАНЖЕВОГО СТИЛЯ ===== */
   </style>
 </head>
@@ -837,21 +497,16 @@ body.light #circlesScreen #circlesDate {
       </div>
     </div>
 
-    <div class="calendar" id="circlesScreen" style="display: none;">
+    <div class="calendar" id="circlesScreen" style="display: none; flex-direction: column;">
       <div class="calendar-header">
-        <h3>Круги за <span id="circlesDate"></span></h3>
-        <div class="day-summary">
-          <span id="circlesCount">0 сделок</span>
-          <span id="dayProfitTotal">0 ₽ прибыли</span>
-        </div>
+        <h3>Круги за выбранный день</h3>
       </div>
-      
-      <div id="circlesContainer" class="circles-list"></div>
-      
+      <div id="circlesContainer" style="overflow-y: auto; max-height: 400px; padding: 10px;"></div>
       <div class="calendar-footer">
         <button onclick="closeCirclesScreen()" class="center-button" style="background-color: gray;">Закрыть</button>
       </div>
     </div>
+
     <!-- Новый экран PRO калькулятора -->
     <div id="proScreen" class="calendar">
       <div class="calendar-header">Калькулятор среднего спреда</div>
@@ -863,7 +518,6 @@ body.light #circlesScreen #circlesDate {
             <tr>
               <th>Сумма (₽)</th>
               <th>Курс (₽/USD)</th>
-              <th>Банк покупки</th>
               <th>Действия</th>
             </tr>
           </thead>
@@ -877,7 +531,6 @@ body.light #circlesScreen #circlesDate {
             <tr>
               <th>Сумма (₽)</th>
               <th>Курс (₽/USD)</th>
-              <th>Банк продажи</th>
               <th>Действия</th>
             </tr>
           </thead>
@@ -905,40 +558,6 @@ body.light #circlesScreen #circlesDate {
   </div>
 
   <script>
-    // Список всех банков РФ
-    const banksList = [
-      "Сбербанк", "Тинькофф", "ВТБ", "Альфа-Банк", "Газпромбанк", "Райффайзенбанк", 
-      "Совкомбанк", "ВБРР", "Россельхозбанк", "МКБ", "АК Барс", 
-      "Банк Санкт-Петербург", "ЮниКредит Банк", "РНКБ", "Почта Банк",
-      "Хоум Кредит", "Росгосстрах Банк", "Озон Банк", "МТС Банк", "Точка",
-      "Авангард", "Сетелем Банк", "Кредит Европа Банк", "Русский Стандарт",
-      "Советский", "Дом.РФ", "Энерготрансбанк", "Зенит", "Уралсиб",
-      "Банк Русский капитал", "Абсолют Банк", "Экспобанк", "Банк Финсервис",
-      "СДМ-Банк", "Банк ДОМ.РФ", "Новикомбанк", "Московский Кредитный Банк",
-      "Банк Уралсиб", "Банк Восточный", "Банк Хлынов", "Банк Акцепт",
-      "Банк Екатерининский", "Банк Зенит Сочи", "Банк ИТБ", "Банк Казани",
-      "Банк Кредит Свисс", "Банк Левобережный", "Банк Нейва", "Банк Оренбург",
-      "Банк Премьер Кредит", "Банк Решение", "Банк РМП", "Банк РСХБ",
-      "Банк Саратов", "Банк СГБ", "Банк Снежинский", "Банк Союз", "Банк Траст",
-      "Банк УБРиР", "Банк ФК Открытие", "Банк ЦентрИнвест", "Банк ЧБРР",
-      "Банк Экономический Союз", "ВУЗ-Банк", "Генбанк", "Глобэксбанк",
-      "Дальневосточный банк", "Еврофинанс Моснарбанк", "ИК Банк",
-      "Интерпромбанк", "Киви Банк", "Коммерцбанк (Евразия)", "Кредит Урал Банк",
-      "КС Банк", "Кубань Кредит", "Кэш Онлайн Банк", "Ланта-Банк",
-      "Металлинвестбанк", "Морской Банк", "МСП Банк", "Народный Банк",
-      "Нацинвестпромбанк", "Объединенный Банк Проблемных Активов", "Оргбанк",
-      "Первый Инвестиционный Банк", "Примсоцбанк", "Промсельхозбанк", "Развитие",
-      "Росэксимбанк", "Руснарбанк", "САММИТ Банк", "Севастопольский Морской Банк",
-      "СИАБ", "СИБЭС", "Синко-Банк", "Славянбанк", "СМП Банк", "Собинбанк",
-      "Солидарность", "СПБ Банк", "СтарБанк", "Таврический", "Темпбанк",
-      "Унифондбанк", "Финсервис Банк", "Фора-Банк", "Ханты-Мансийский Банк",
-      "Экономбанк", "Экспресс-Волга", "Элита","Яндекс Банк"
-    ];
-    function removeRow(button) {
-  if (!confirm('Вы уверены, что хотите удалить эту строку?')) return;
-  const row = button.closest('tr');
-  row.remove();
-}
     function getTodayDate() {
       const today = new Date();
       const year = today.getFullYear();
@@ -950,7 +569,6 @@ body.light #circlesScreen #circlesDate {
     document.addEventListener("DOMContentLoaded", () => {
       const theme = localStorage.getItem("theme") || "dark";
       document.body.classList.add(theme);
-      updateHeaderColors();
 
       const savedDate = localStorage.getItem("lastSelectedDate");
       const defaultDate = getTodayDate();
@@ -1117,29 +735,16 @@ body.light #circlesScreen #circlesDate {
     }
 
     function toggleTheme() {
-  const body = document.body;
-  if (body.classList.contains('dark')) {
-    body.classList.replace('dark', 'light');
-    localStorage.setItem('theme', 'light');
-  } else {
-    body.classList.replace('light', 'dark');
-    localStorage.setItem('theme', 'dark');
-  }
-  updateHeaderColors();
-}
-
-function updateHeaderColors() {
-  const isDark = document.body.classList.contains('dark');
-  const color = isDark ? 'white' : 'black';
-  // Обновляем цвет заголовка "Круги за день"
-  document.querySelectorAll('#circlesScreen .calendar-header h3, #circlesDate').forEach(el => {
-    el.style.color = color;
-  });
-  // Обновляем другие заголовки (если нужно)
-  document.querySelectorAll('.calendar-header, .summary-card h3, .summary-card h4').forEach(el => {
-    el.style.color = color;
-  });
-}
+      const body = document.body;
+      if (body.classList.contains('dark')) {
+        body.classList.replace('dark', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.classList.replace('light', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateHeaderColors();
+    }
 
     function updateHeaderColors() {
       const isDark = document.body.classList.contains('dark');
@@ -1150,69 +755,68 @@ function updateHeaderColors() {
     }
 
     function openCirclesWindow() {
-  const selectedDate = document.getElementById('calendarDate').value;
-  if (!selectedDate) {
-    alert("Пожалуйста, выберите дату.");
-    return;
-  }
+      const selectedDate = document.getElementById('calendarDate').value;
+      if (!selectedDate) {
+        alert("Пожалуйста, выберите дату.");
+        return;
+      }
 
-  const stats = JSON.parse(localStorage.getItem('stats')) || {};
-  const dayStats = stats[selectedDate] || [];
-  const container = document.getElementById('circlesContainer');
-  
-  // Устанавливаем дату в заголовок
-  document.getElementById('circlesDate').textContent = selectedDate;
-  
-  // Обновляем статистику дня
-  document.getElementById('circlesCount').textContent = `${dayStats.length} ${declOfNum(dayStats.length, ['сделка', 'сделки', 'сделок'])}`;
-  
-  const totalProfit = dayStats.reduce((sum, deal) => sum + (deal.netProfit || 0), 0);
-  document.getElementById('dayProfitTotal').textContent = `${totalProfit.toFixed(2)} ₽ прибыли`;
+      const stats = JSON.parse(localStorage.getItem('stats')) || {};
+      const dayStats = stats[selectedDate] || [];
+      const container = document.getElementById('circlesContainer');
+      container.innerHTML = '';
 
-  container.innerHTML = '';
+      if (dayStats.length === 0) {
+        container.innerHTML = '<p style="text-align:center;">Круги за этот день не найдены.</p>';
+      } else {
+        dayStats.forEach((circle, index) => {
+          const div = document.createElement('div');
+          div.className = circle.type === "pro" ? 'circle pro-circle' : 'circle';
+          div.style.position = 'relative';
+          div.style.paddingRight = '40px';
 
-  if (dayStats.length === 0) {
-    container.innerHTML = '<div class="empty-circles">Нет кругов за этот день</div>';
-  } else {
-    dayStats.forEach((circle, index) => {
-      const circleEl = document.createElement('div');
-      circleEl.className = circle.type === "pro" ? 'circle pro-circle' : 'circle';
-      
-      const isPro = circle.type === "pro";
-      const title = isPro ? `PRO круг #${index + 1}` : `Круг #${index + 1}`;
-      
-      circleEl.innerHTML = `
-        <div class="circle-header">
-          <div class="circle-title">${title}</div>
-        </div>
-        <div class="circle-content">
-          <div class="circle-item"><strong>Курс покупки:</strong> ${isPro ? circle.buyRate.toFixed(4) : circle.buyRate} ₽/USD</div>
-          <div class="circle-item"><strong>Курс продажи:</strong> ${isPro ? circle.sellRate.toFixed(4) : circle.sellRate} ₽/USD</div>
-          ${isPro ? `<div class="circle-item"><strong>Банки покупки:</strong> ${circle.buyBanks?.join(', ') || '-'}</div>` : ''}
-          ${isPro ? `<div class="circle-item"><strong>Банки продажи:</strong> ${circle.sellBanks?.join(', ') || '-'}</div>` : ''}
-          <div class="circle-item"><strong>Спред:</strong> ${circle.spread.toFixed(2)}%</div>
-          <div class="circle-item"><strong>Сумма:</strong> ${circle.amount.toFixed(2)} ₽</div>
-          <div class="circle-item"><strong>Прибыль:</strong> ${circle.netProfit.toFixed(2)} ₽</div>
-          ${circle.fee ? `<div class="circle-item"><strong>Комиссия:</strong> ${circle.fee.toFixed(2)} ₽</div>` : ''}
-        </div>
-        <button class="delete-circle-btn" onclick="deleteCircle('${selectedDate}', ${index})">×</button>
-      `;
-      
-      container.appendChild(circleEl);
-    });
-  }
+          let content = '';
+          if (circle.type === "pro") {
+              content = `
+                  <strong>PRO круг #${index + 1}</strong><br>
+                  Средний курс покупки: ${circle.buyRate.toFixed(4)} ₽/USD<br>
+                  Средний курс продажи: ${circle.sellRate.toFixed(4)} ₽/USD<br>
+                  Спред: ${circle.spread.toFixed(2)}%<br>
+                  Общая сумма: ${circle.amount.toFixed(2)} ₽<br>
+                  Чистая прибыль: ${circle.netProfit.toFixed(2)} ₽
+              `;
+          } else {
+              content = `
+                  <strong>Круг #${index + 1}</strong><br>
+                  Курс покупки: ${circle.buyRate} ₽/USD<br>
+                  Курс продажи: ${circle.sellRate} ₽/USD<br>
+                  Спред: ${circle.spread}%<br>
+                  Сумма сделки: ${circle.amount} ₽<br>
+                  Чистая прибыль: ${circle.netProfit} ₽<br>
+                  ${circle.fee ? `Комиссия: ${circle.fee} ₽` : ''}
+              `;
+          }
 
-  document.getElementById('calendarScreen').style.display = 'none';
-  document.getElementById('circlesScreen').style.display = 'flex';
-}
+          div.innerHTML = content + `
+              <button style="
+                  position:absolute; 
+                  top:10px; 
+                  right:10px; 
+                  background:#e74c3c; 
+                  color:#fff; 
+                  border:none; 
+                  border-radius:5px; 
+                  cursor:pointer;
+                  padding: 5px 10px;
+              " onclick="deleteCircle('${selectedDate}', ${index})">Удалить</button>
+          `;
+          container.appendChild(div);
+        });
+      }
 
-// Функция для склонения слов
-function declOfNum(n, titles) {
-  return titles[
-    n % 10 === 1 && n % 100 !== 11 ? 0 :
-    n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2
-  ];
-}
+      document.getElementById('calendarScreen').style.display = 'none';
+      document.getElementById('circlesScreen').style.display = 'flex';
+    }
 
     function closeCirclesScreen() {
       document.getElementById('circlesScreen').style.display = 'none';
@@ -1250,220 +854,83 @@ function declOfNum(n, titles) {
       }
     }
     
-    
-    
-    // Обновлённая функция addRow с красивым выпадающим списком
     function addRow(tableId) {
-  const tbody = document.querySelector(`#${tableId} tbody`);
-  const tr = document.createElement('tr');
-  
-  tr.innerHTML = `
-    <td><input type="number" class="pro-input" min="0" step="0.01" placeholder="Сумма ₽" required></td>
-    <td><input type="number" class="pro-input" min="0" step="0.0001" placeholder="Курс ₽/USD" required></td>
-    <td>
-      <div class="bank-search-container">
-        <input type="text" class="bank-search-input" placeholder="Начните вводить банк..." autocomplete="off">
-        <div class="bank-search-dropdown">
-          <div class="bank-search-results"></div>
-        </div>
-        <input type="hidden" class="selected-bank">
-      </div>
-    </td>
-    <td><button class="remove-btn" onclick="removeRow(this)">Удалить</button></td>
-  `;
-
-  initBankSearch(tr);
-  tbody.appendChild(tr);
-}
-function initBankSearch(row) {
-  const container = row.querySelector('.bank-search-container');
-  const input = container.querySelector('.bank-search-input');
-  const dropdown = container.querySelector('.bank-search-dropdown');
-  const results = container.querySelector('.bank-search-results');
-  const hiddenInput = container.querySelector('.selected-bank');
-
-  // Функция обновления результатов поиска
-  const updateResults = (searchTerm = '') => {
-    results.innerHTML = '';
-    
-    const filteredBanks = banksList.filter(bank => 
-      bank.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    
-    if (filteredBanks.length === 0) {
-      results.innerHTML = '<div class="bank-search-item no-results">Банки не найдены</div>';
-    } else {
-      filteredBanks.forEach(bank => {
-        const item = document.createElement('div');
-        item.className = 'bank-search-item';
-        item.textContent = bank;
-        item.addEventListener('click', () => {
-          input.value = bank;
-          hiddenInput.value = bank;
-          dropdown.classList.remove('active');
-        });
-        results.appendChild(item);
-      });
+      const tbody = document.querySelector(`#${tableId} tbody`);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="number" class="pro-input" min="0" step="0.01" placeholder="Сумма ₽" required></td>
+        <td><input type="number" class="pro-input" min="0" step="0.0001" placeholder="Курс ₽/USD" required></td>
+        <td><button class="remove-btn" onclick="removeRow(this)">Удалить</button></td>
+      `;
+      tbody.appendChild(tr);
     }
-  };
-
-  // Обработчики событий
-  input.addEventListener('focus', () => {
-    dropdown.classList.add('active');
-    updateResults();
-  });
-  
-  input.addEventListener('input', (e) => {
-    updateResults(e.target.value);
-  });
-  
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      dropdown.classList.remove('active');
+    
+    function removeRow(button) {
+      const tr = button.closest('tr');
+      tr.remove();
     }
-  });
-  
-  document.addEventListener('click', (e) => {
-    if (!container.contains(e.target)) {
-      dropdown.classList.remove('active');
+    
+    function calculateSpread() {
+      const buyRows = document.querySelectorAll('#buyTable tbody tr');
+      let S_pokupka = 0, USD_pokupka = 0;
+
+      for (const row of buyRows) {
+        const sum = parseFloat(row.cells[0].querySelector('input').value);
+        const rate = parseFloat(row.cells[1].querySelector('input').value);
+        if (isNaN(sum) || isNaN(rate) || sum <= 0 || rate <= 0) continue;
+        S_pokupka += sum;
+        USD_pokupka += sum / rate;
+      }
+
+      if (USD_pokupka === 0) {
+        alert('Введите хотя бы одну корректную сделку покупки');
+        return;
+      }
+
+      const K_pokupka = S_pokupka / USD_pokupka;
+
+      const sellRows = document.querySelectorAll('#sellTable tbody tr');
+      let S_prodazha = 0, USD_prodazha = 0;
+
+      for (const row of sellRows) {
+        const sum = parseFloat(row.cells[0].querySelector('input').value);
+        const rate = parseFloat(row.cells[1].querySelector('input').value);
+        if (isNaN(sum) || isNaN(rate) || sum <= 0 || rate <= 0) continue;
+        S_prodazha += sum;
+        USD_prodazha += sum / rate;
+      }
+
+      if (USD_prodazha === 0) {
+        alert('Введите хотя бы одну корректную сделку продажи');
+        return;
+      }
+
+      const K_prodazha = S_prodazha / USD_prodazha;
+      const profit = S_prodazha - USD_prodazha * K_pokupka;
+      const spreadPercent = (profit / S_prodazha) * 100;
+
+      document.getElementById('spreadResult').innerHTML = `
+        <h3>Результаты:</h3>
+        <p>Средневзвешенный курс покупки: ${K_pokupka.toFixed(4)} ₽/USD</p>
+        <p>Средневзвешенный курс продажи: ${K_prodazha.toFixed(4)} ₽/USD</p>
+        <p>Прибыль (рублей): ${profit.toFixed(2)} ₽</p>
+        <p>Средний спред (%): ${spreadPercent.toFixed(2)}%</p>
+      `;
+      
+      // Сохраняем данные для возможного сохранения
+      currentSpreadData = {
+        buyRate: parseFloat(K_pokupka.toFixed(4)),
+        sellRate: parseFloat(K_prodazha.toFixed(4)),
+        spread: parseFloat(spreadPercent.toFixed(2)),
+        amount: parseFloat(S_prodazha.toFixed(2)),
+        netProfit: parseFloat(profit.toFixed(2)),
+        type: "pro"
+      };
+      
+      // Показываем кнопку сохранения
+      document.getElementById('saveProBtn').style.display = 'block';
     }
-  });
-  
-  // Инициализация
-  updateResults();
-}
-function initBankSearch(row) {
-  const container = row.querySelector('.bank-search-container');
-  const input = container.querySelector('.bank-search-input');
-  const dropdown = container.querySelector('.bank-search-dropdown');
-  const results = container.querySelector('.bank-search-results');
-  const hiddenInput = container.querySelector('.selected-bank');
-
-  // Функция обновления результатов поиска
-  const updateResults = (searchTerm = '') => {
-    results.innerHTML = '';
     
-    const filteredBanks = banksList.filter(bank => 
-      bank.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    
-    if (filteredBanks.length === 0) {
-      results.innerHTML = '<div class="bank-search-item no-results">Банки не найдены</div>';
-    } else {
-      filteredBanks.forEach(bank => {
-        const item = document.createElement('div');
-        item.className = 'bank-search-item';
-        item.textContent = bank;
-        item.addEventListener('click', () => {
-          input.value = bank;
-          hiddenInput.value = bank;
-          dropdown.classList.remove('active');
-        });
-        results.appendChild(item);
-      });
-    }
-  };
-
-  // Обработчики событий
-  input.addEventListener('focus', () => {
-    dropdown.classList.add('active');
-    updateResults();
-  });
-  
-  input.addEventListener('input', (e) => {
-    updateResults(e.target.value);
-  });
-  
-  document.addEventListener('click', (e) => {
-    if (!container.contains(e.target)) {
-      dropdown.classList.remove('active');
-    }
-  });
-  
-  // Инициализация
-  updateResults();
-}
-function calculateSpread() {
-  const buyRows = document.querySelectorAll('#buyTable tbody tr');
-  let S_pokupka = 0, USD_pokupka = 0;
-  const buyBanks = new Set();
-
-  for (const row of buyRows) {
-    const sumInput = row.cells[0].querySelector('input');
-    const rateInput = row.cells[1].querySelector('input');
-    const bankInput = row.querySelector('.selected-bank');
-    
-    const sum = parseFloat(sumInput.value);
-    const rate = parseFloat(rateInput.value);
-    const bank = bankInput.value;
-    
-    if (isNaN(sum) || isNaN(rate) || sum <= 0 || rate <= 0 || !bank) continue;
-    
-    S_pokupka += sum;
-    USD_pokupka += sum / rate;
-    buyBanks.add(bank);
-  }
-
-  if (USD_pokupka === 0) {
-    alert('Введите хотя бы одну корректную сделку покупки');
-    return;
-  }
-
-  const K_pokupka = S_pokupka / USD_pokupka;
-
-  const sellRows = document.querySelectorAll('#sellTable tbody tr');
-  let S_prodazha = 0, USD_prodazha = 0;
-  const sellBanks = new Set();
-
-  // Обработка строк продажи
-  for (const row of sellRows) {
-    const sumInput = row.cells[0].querySelector('input');
-    const rateInput = row.cells[1].querySelector('input');
-    const bankInput = row.querySelector('.selected-bank'); // Исправлено здесь
-    
-    const sum = parseFloat(sumInput.value);
-    const rate = parseFloat(rateInput.value);
-    const bank = bankInput.value;
-    
-    if (isNaN(sum) || isNaN(rate) || sum <= 0 || rate <= 0 || !bank) continue;
-    
-    S_prodazha += sum;
-    USD_prodazha += sum / rate;
-    sellBanks.add(bank);
-  }
-
-  if (USD_prodazha === 0) {
-    alert('Введите хотя бы одну корректную сделку продажи');
-    return;
-  }
-
-  const K_prodazha = S_prodazha / USD_prodazha;
-  const profit = S_prodazha - USD_prodazha * K_pokupka;
-  const spreadPercent = (profit / S_prodazha) * 100;
-
-  document.getElementById('spreadResult').innerHTML = `
-    <h3>Результаты:</h3>
-    <p>Средневзвешенный курс покупки: ${K_pokupka.toFixed(4)} ₽/USD</p>
-    <p>Банки покупки: ${Array.from(buyBanks).join(', ')}</p>
-    <p>Средневзвешенный курс продажи: ${K_prodazha.toFixed(4)} ₽/USD</p>
-    <p>Банки продажи: ${Array.from(sellBanks).join(', ')}</p>
-    <p>Прибыль (рублей): ${profit.toFixed(2)} ₽</p>
-    <p>Средний спред (%): ${spreadPercent.toFixed(2)}%</p>
-  `;
-  
-  currentSpreadData = {
-    buyRate: parseFloat(K_pokupka.toFixed(4)),
-    sellRate: parseFloat(K_prodazha.toFixed(4)),
-    spread: parseFloat(spreadPercent.toFixed(2)),
-    amount: parseFloat(S_prodazha.toFixed(2)),
-    netProfit: parseFloat(profit.toFixed(2)),
-    type: "pro",
-    buyBanks: Array.from(buyBanks),
-    sellBanks: Array.from(sellBanks)
-  };
-  
-  document.getElementById('saveProBtn').style.display = 'block';
-}
     function saveSpreadResults() {
       if (!currentSpreadData || Object.keys(currentSpreadData).length === 0) {
         alert("Сначала сделайте расчёт (нажмите 'Посчитать средний спред')");
@@ -1481,6 +948,7 @@ function calculateSpread() {
       localStorage.setItem('stats', JSON.stringify(stats));
       alert("PRO расчет успешно сохранён в статистику!");
       
+      // Скрываем кнопку после сохранения
       document.getElementById('saveProBtn').style.display = 'none';
     }
   </script>
