@@ -754,6 +754,7 @@ body.light #circlesScreen #circlesDate {
 .bank-search-item.no-results:hover {
   background-color: transparent;
 }
+
 /* ===== КОНЕЦ PRO ОРАНЖЕВОГО СТИЛЯ ===== */
   </style>
 </head>
@@ -933,7 +934,11 @@ body.light #circlesScreen #circlesDate {
       "Унифондбанк", "Финсервис Банк", "Фора-Банк", "Ханты-Мансийский Банк",
       "Экономбанк", "Экспресс-Волга", "Элита","Яндекс Банк"
     ];
-
+    function removeRow(button) {
+  if (!confirm('Вы уверены, что хотите удалить эту строку?')) return;
+  const row = button.closest('tr');
+  row.remove();
+}
     function getTodayDate() {
       const today = new Date();
       const year = today.getFullYear();
