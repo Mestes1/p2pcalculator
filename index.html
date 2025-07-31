@@ -106,13 +106,23 @@
       color: #fff;
     }
 
-    .calendar-header {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #1a7dff;
-      text-align: center;
-    }
+   /* Добавляем в раздел стилей для темной темы */
+body.dark .calendar-header {
+  color: #ffffff !important; /* Белый цвет для темной темы */
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Добавляем в раздел стилей для светлой темы */
+body.light .calendar-header {
+  color: #111111 !important; /* Черный цвет для светлой темы */
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
     .calendar-body {
       width: 100%;
@@ -416,6 +426,338 @@
   margin-bottom: 10px;
 }
 /* ===== КОНЕЦ PRO ОРАНЖЕВОГО СТИЛЯ ===== */
+/* Добавляем эти стили в раздел <style> */
+  #circlesScreen {
+    background-color: #1e1e1e;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  }
+  
+  #circlesScreen.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  #circlesContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+    max-height: 60vh;
+  }
+  
+  .circle {
+    background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-left: 4px solid #1a7dff;
+    transition: all 0.3s ease;
+    transform: scale(0.98);
+    opacity: 0;
+    animation: fadeIn 0.4s forwards;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .circle.pro-circle {
+    border-left-color: #ff8a00;
+  }
+  
+  .circle:hover {
+    transform: scale(1.01);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(26, 125, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .circle:hover::before {
+    opacity: 1;
+  }
+  
+  .circle.pro-circle::before {
+    background: linear-gradient(90deg, rgba(255, 138, 0, 0.1), transparent);
+  }
+  
+  .circle strong {
+    color: #1a7dff;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .circle.pro-circle strong {
+    color: #ff8a00;
+  }
+  
+  .circle p {
+    margin: 6px 0;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+  }
+  
+  .delete-circle-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(231, 76, 60, 0.9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .delete-circle-btn:hover {
+    background: #e74c3c;
+    transform: scale(1.05);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .empty-circles-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+    font-size: 1.1rem;
+    animation: fadeIn 0.5s;
+  }
+  
+  .circle-profit {
+    font-weight: bold;
+    color: #4CAF50 !important;
+    margin-top: 8px !important;
+    font-size: 1rem !important;
+  }
+  /* Обновленные стили для окна кругов */
+#circlesScreen {
+    background-color: var(--circles-bg);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    border: 1px solid var(--border-color);
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+/* Цветовые переменные для тем */
+body.dark {
+    --circles-bg: #2a2a2a;
+    --circle-bg: #1e1e1e;
+    --circle-border: #1a7dff;
+    --circle-pro-border: #ff8a00;
+    --text-color: #e0e0e0;
+    --title-color: #ffffff;
+    --border-color: #333;
+    --hover-bg: #333;
+}
+
+body.light {
+    --circles-bg: #f5f5f5;
+    --circle-bg: #ffffff;
+    --circle-border: #1a7dff;
+    --circle-pro-border: #ff8a00;
+    --text-color: #333333;
+    --title-color: #111111;
+    --border-color: #ddd;
+    --hover-bg: #f0f0f0;
+}
+
+/* Стили для кругов */
+.circle {
+    background: var(--circle-bg);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--circle-border);
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.circle.pro-circle {
+    border-left-color: var(--circle-pro-border);
+}
+
+.circle:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    background: var(--hover-bg);
+}
+
+/* Стили для текста внутри кругов */
+.circle strong {
+    color: var(--circle-border);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.circle.pro-circle strong {
+    color: var(--circle-pro-border);
+}
+
+.circle p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+/* Кнопка удаления */
+.delete-circle-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(231, 76, 60, 0.9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.delete-circle-btn:hover {
+    background: #e74c3c;
+    transform: scale(1.05);
+}
+
+/* Заголовок окна */
+#circlesScreen .calendar-header {
+    color: var(--title-color);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Сообщение при отсутствии кругов */
+.empty-circles-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.circle {
+    animation: fadeIn 0.4s forwards;
+}
+/* Обновленные стили для светлой темы */
+body.light {
+    --circles-bg: #f8f9fa;              /* Светло-серый фон окна */
+    --circle-bg: #ffffff;                /* Белый фон карточек */
+    --circle-border: #1a7dff;            /* Синяя полоса для обычных кругов */
+    --circle-pro-border: #ff8a00;        /* Оранжевая полоса для PRO кругов */
+    --text-color: #3a3a3a;               /* Темно-серый текст */
+    --title-color: #1a1a1a;              /* Черный заголовок */
+    --border-color: #e0e0e0;             /* Светлая граница */
+    --hover-bg: #f0f7ff;                 /* Голубоватый hover */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Мягкие тени */
+}
+
+/* Улучшенные стили карточек для светлой темы */
+body.light .circle {
+    background: var(--circle-bg);
+    border: 1px solid var(--border-color); /* Добавляем тонкую границу */
+    box-shadow: 0 2px 12px var(--shadow-color);
+    color: var(--text-color);
+}
+
+body.light .circle:hover {
+    background: var(--hover-bg);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+body.light .circle strong {
+    color: var(--circle-border); /* Синий цвет заголовка */
+}
+
+body.light .circle.pro-circle strong {
+    color: var(--circle-pro-border); /* Оранжевый для PRO */
+}
+
+body.light .circle-profit {
+    color: #2e7d32 !important; /* Зеленый для прибыли */
+}
+
+/* Кнопка удаления в светлой теме */
+body.light .delete-circle-btn {
+    background: rgba(231, 76, 60, 0.9);
+    color: white;
+}
+
+/* Фон всего окна */
+body.light #circlesScreen {
+    background: var(--circles-bg);
+    border: 1px solid var(--border-color);
+}
+
+/* Сообщение "нет кругов" */
+body.light .empty-circles-message {
+    color: #7a7a7a;
+}
+/* Добавляем в конец стилей для светлой темы */
+body.light .circle p:nth-child(2),  /* Курс покупки */
+body.light .circle p:nth-child(3),  /* Курс продажи */
+body.light .circle p:nth-child(4),  /* Куплено USDT */
+body.light .circle p:nth-child(5),  /* Продано USDT */
+body.light .circle p:nth-child(6),  /* Спред */
+body.light .circle p:nth-child(7) { /* Сумма сделки */
+    color: #000000 !important;
+}
+
+/* Для PRO кругов (структура немного отличается) */
+body.light .circle.pro-circle p:nth-child(2),  /* Средний курс покупки */
+body.light .circle.pro-circle p:nth-child(3),  /* Средний курс продажи */
+body.light .circle.pro-circle p:nth-child(4),  /* Куплено USDT */
+body.light .circle.pro-circle p:nth-child(5),  /* Продано USDT */
+body.light .circle.pro-circle p:nth-child(6),  /* Спред */
+body.light .circle.pro-circle p:nth-child(7) { /* Общая сумма */
+    color: #000000 !important;
+}
   </style>
 </head>
 <body class="dark">
@@ -951,6 +1293,92 @@
       // Скрываем кнопку после сохранения
       document.getElementById('saveProBtn').style.display = 'none';
     }
+    // Обновляем функцию openCirclesWindow
+  function openCirclesWindow() {
+    const selectedDate = document.getElementById('calendarDate').value;
+    if (!selectedDate) {
+        alert("Пожалуйста, выберите дату.");
+        return;
+    }
+
+    const stats = JSON.parse(localStorage.getItem('stats')) || {};
+    const dayStats = stats[selectedDate] || [];
+    const container = document.getElementById('circlesContainer');
+    container.innerHTML = '';
+
+    if (dayStats.length === 0) {
+        container.innerHTML = `
+            <div class="empty-circles-message">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <p>Круги за этот день не найдены</p>
+            </div>
+        `;
+    } else {
+        dayStats.forEach((circle, index) => {
+            const div = document.createElement('div');
+            div.className = circle.type === "pro" ? 'circle pro-circle' : 'circle';
+            div.style.animationDelay = `${index * 0.1}s`;
+
+            // Рассчитываем количество USDT
+            let boughtUsdt = 0;
+            let soldUsdt = 0;
+            
+            if (circle.type === "pro") {
+                boughtUsdt = circle.amount / circle.buyRate;
+                soldUsdt = circle.amount / circle.sellRate;
+            } else {
+                boughtUsdt = circle.amount / circle.buyRate;
+                soldUsdt = (circle.amount + circle.netProfit) / circle.sellRate;
+            }
+
+            let content = '';
+            if (circle.type === "pro") {
+                content = `
+                    <strong>PRO круг #${index + 1}</strong>
+                    <p>Средний курс покупки: ${circle.buyRate.toFixed(4)} ₽/USD</p>
+                    <p>Средний курс продажи: ${circle.sellRate.toFixed(4)} ₽/USD</p>
+                    <p>Куплено USDT: ${boughtUsdt.toFixed(2)}</p>
+                    <p>Продано USDT: ${soldUsdt.toFixed(2)}</p>
+                    <p>Спред: ${circle.spread.toFixed(2)}%</p>
+                    <p>Общая сумма: ${circle.amount.toFixed(2)} ₽</p>
+                    <p class="circle-profit">Чистая прибыль: ${circle.netProfit.toFixed(2)} ₽</p>
+                `;
+            } else {
+                content = `
+                    <strong>Круг #${index + 1}</strong>
+                    <p>Курс покупки: ${circle.buyRate} ₽/USD</p>
+                    <p>Курс продажи: ${circle.sellRate} ₽/USD</p>
+                    <p>Куплено USDT: ${boughtUsdt.toFixed(2)}</p>
+                    <p>Продано USDT: ${soldUsdt.toFixed(2)}</p>
+                    <p>Спред: ${circle.spread}%</p>
+                    <p>Сумма сделки: ${circle.amount} ₽</p>
+                    ${circle.fee ? `<p>Комиссия: ${circle.fee} ₽</p>` : ''}
+                    <p class="circle-profit">Чистая прибыль: ${circle.netProfit} ₽</p>
+                `;
+            }
+
+            div.innerHTML = content + `
+                <button class="delete-circle-btn" onclick="deleteCircle('${selectedDate}', ${index})">
+                    Удалить
+                </button>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    document.getElementById('calendarScreen').style.display = 'none';
+    const circlesScreen = document.getElementById('circlesScreen');
+    circlesScreen.style.display = 'flex';
+    
+    // Анимация появления
+    setTimeout(() => {
+        circlesScreen.classList.add('show');
+    }, 10);
+  }
   </script>
 </body>
 </html>
