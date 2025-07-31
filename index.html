@@ -776,27 +776,33 @@ body.light .circle.pro-circle p:nth-child(7) { /* Общая сумма */
 
 /* Уменьшаем отступы на мобильных устройствах */
 @media (max-width: 600px) {
-  .circle {
-    padding: 12px;
-  }
-  
-  .circle p {
-    font-size: 0.9rem !important;
-    margin: 5px 0 !important;
-  }
-  
-  .circle strong {
-    font-size: 1rem !important;
-  }
-  
-  #circlesScreen {
-    padding: 15px !important;
-  }
-  
-  #circlesContainer {
-    max-height: 65vh !important;
-    padding: 5px !important;
-  }
+  /* Обновленные стили для контейнера кругов */
+#circlesContainer {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 10px;
+  width: 100%;
+}
+
+/* Стили для каждого круга */
+.circle {
+  background: var(--circle-bg);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--circle-border);
+  color: var(--text-color);
+  position: relative;
+  overflow: visible; /* Изменено с hidden на visible */
+  word-break: break-word;
+}
+
+/* Убираем анимацию fadeIn, если она мешает */
+.circle {
+  animation: none;
+  opacity: 1;
+  transform: none;
 }
 
 /* Улучшаем скролл на мобильных */
@@ -807,6 +813,7 @@ body.light .circle.pro-circle p:nth-child(7) { /* Общая сумма */
 #circlesContainer::-webkit-scrollbar-thumb {
   background-color: rgba(255,255,255,0.2);
   border-radius: 5px;
+}
 }
   </style>
 </head>
@@ -1282,7 +1289,7 @@ body.light .circle.pro-circle p:nth-child(7) { /* Общая сумма */
     }
     // Обновляем функцию openCirclesWindow
   
-    function openCirclesWindow() {
+   function openCirclesWindow() {
     const selectedDate = document.getElementById('calendarDate').value;
     if (!selectedDate) {
         alert("Пожалуйста, выберите дату.");
@@ -1292,20 +1299,22 @@ body.light .circle.pro-circle p:nth-child(7) { /* Общая сумма */
     const stats = JSON.parse(localStorage.getItem('stats')) || {};
     const dayStats = stats[selectedDate] || [];
     const container = document.getElementById('circlesContainer');
+    
+    // Очищаем контейнер
     container.innerHTML = '';
 
     if (dayStats.length === 0) {
         container.innerHTML = '<div class="empty-circles-message"><p>Круги за этот день не найдены</p></div>';
     } else {
         dayStats.forEach((circle, index) => {
-            const div = document.createElement('div');
-            div.className = circle.type === "pro" ? 'circle pro-circle' : 'circle';
+            const circleElement = document.createElement('div');
+            circleElement.className = circle.type === "pro" ? 'circle pro-circle' : 'circle';
             
             // Рассчитываем USDT
             const boughtUsdt = circle.amount / circle.buyRate;
             const soldUsdt = (circle.amount + circle.netProfit) / circle.sellRate;
 
-            let content = `
+            circleElement.innerHTML = `
                 <strong>${circle.type === "pro" ? 'PRO ' : ''}Круг #${index + 1}</strong>
                 <p>${circle.type === "pro" ? 'Средний курс покупки' : 'Курс покупки'}: ${circle.buyRate.toFixed(circle.type === "pro" ? 4 : 2)} ₽/USD</p>
                 <p>${circle.type === "pro" ? 'Средний курс продажи' : 'Курс продажи'}: ${circle.sellRate.toFixed(circle.type === "pro" ? 4 : 2)} ₽/USD</p>
@@ -1315,20 +1324,23 @@ body.light .circle.pro-circle p:nth-child(7) { /* Общая сумма */
                 <p>Сумма: ${circle.amount.toFixed(2)} ₽</p>
                 ${circle.fee ? `<p>Комиссия: ${circle.fee.toFixed(2)} ₽</p>` : ''}
                 <p class="circle-profit">Прибыль: ${circle.netProfit.toFixed(2)} ₽</p>
-            `;
-
-            div.innerHTML = content + `
                 <button class="delete-circle-btn" onclick="deleteCircle('${selectedDate}', ${index})">
                     Удалить
                 </button>
             `;
-            container.appendChild(div);
+            
+            container.appendChild(circleElement);
         });
     }
 
+    // Показываем экран с кругами
     document.getElementById('calendarScreen').style.display = 'none';
     document.getElementById('circlesScreen').style.display = 'flex';
-    document.getElementById('circlesScreen').classList.add('show');
+    
+    // Добавляем класс для анимации
+    setTimeout(() => {
+        document.getElementById('circlesScreen').classList.add('show');
+    }, 10);
 }
   
   </script>
